@@ -1,7 +1,7 @@
 var dateTimeData;
 var otherData;
 var type = "line";
-var label = "Air Quality Index"
+var label = "Air Quality"
 
 var diseaseDetectionData, soilTextureData, weedPestData, yieldPredictionData;
 

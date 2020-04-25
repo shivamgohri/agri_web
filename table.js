@@ -5,8 +5,26 @@ function updateTable(){
             $(this).parents("tr").remove();
         });
 
-        var markup = "<tr><th>" + "Sr. No."  + "</th><th>"+ "Date-Time" +"</th><th>" + "Index Value" + "</th></tr>";
-        $("table thead").append(markup);
+        if(label == "Air Quality"){
+            var markup = "<tr><th>" + "Sr. No."  + "</th><th>"+ "Date-Time" +"</th><th>" + "Air-Quality Index" + "</th></tr>";
+            $("table thead").append(markup);
+        }
+        else if(label == "Soil pH"){
+            var markup = "<tr><th>" + "Sr. No."  + "</th><th>"+ "Date-Time" +"</th><th>" + " Soil-pH Index" + "</th></tr>";
+            $("table thead").append(markup);
+        }
+        else if(label == "Soil Moisture"){
+            var markup = "<tr><th>" + "Sr. No."  + "</th><th>"+ "Date-Time" +"</th><th>" + " Soil-Moisture Index" + "</th></tr>";
+            $("table thead").append(markup);
+        }
+        else if(label == "Temperature"){
+            var markup = "<tr><th>" + "Sr. No."  + "</th><th>"+ "Date-Time" +"</th><th>" + " Temperature Index" + "</th></tr>";
+            $("table thead").append(markup);
+        }
+        else if(label == "Humidity"){
+            var markup = "<tr><th>" + "Sr. No."  + "</th><th>"+ "Date-Time" +"</th><th>" + " Humidity Index" + "</th></tr>";
+            $("table thead").append(markup);
+        }
 
         $("table tbody").find('td').each(function(){
             $(this).parents("tr").remove();
