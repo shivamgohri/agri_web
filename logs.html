@@ -71,10 +71,10 @@
                     </li>
                 </ul>
 
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" aria-label="Search">
-                    <input value="Search" class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="updateSearch()" >
-                </form>
+                <div class="form-inline my-2 my-lg-0">
+                    <input class="form-inline my-2 my-lg-0 form-control mr-sm-2" id="searchInput" type="text" placeholder="Search" aria-label="Search"></input>
+                    <input value="Search" class="form-inline my-2 my-lg-0 btn btn-outline-success my-2 my-sm-0" id="searchButton" type="button" onclick="updateSearch()" ></input>                    
+                </div>
                 <script src="search.js"></script>
 
             </div>
@@ -97,7 +97,7 @@
 
             }
         </script>
-        <input type="button" value ="view Image" id="viewbtn" onclick="showImage();">
+        <input type="button" value ="View Logs" id="viewbtn" onclick="showImage();">
         <iframe src="test" width="100%" height="100%" ></iframe> 
         
 

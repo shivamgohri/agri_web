@@ -1,7 +1,15 @@
+var input = document.getElementById("searchInput");
+input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("searchButton").click();
+    }
+});
+
 var searchQuery;
 
 $(document).ready(function(){
-    $("#search").on("keyup", function() {
+    $("#searchInput").on("keyup", function() {
         
         var value = $(this).val().toLowerCase();
       
@@ -20,13 +28,10 @@ $(document).ready(function(){
         else if(value == "log in" || value == "login" || value == "signin" || value == "sign in"){
             searchQuery = "log in";
         }
-
-
     });
+});
 
-  });
-
-function updateSearch(){   
+function updateSearch(){ 
     
     if(searchQuery == "guides"){
         location.href="guides.html";
@@ -43,5 +48,4 @@ function updateSearch(){
     else if(searchQuery == "log in"){
         location.href="login.html";
     }
-
 }
