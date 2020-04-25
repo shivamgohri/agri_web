@@ -5,12 +5,12 @@ var label = "Air Quality Index"
 
 var dateTimeRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Date-Time.json", function(json){
     dateTimeData = json;
-    dateTimeData.splice(0,1);
+    dateTimeData.shift();
 });
 
 var otherRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Air-Quality.json", function(json){
     otherData = json;
-    otherData.splice(0,1);
+    otherData.shift();
 });
 
 var data, options, ctx, myChart;
@@ -40,8 +40,6 @@ $.when(dateTimeRequest, otherRequest).then(function(){
         data: data,
     });
 });
-
-
 
 
 
@@ -89,13 +87,13 @@ function updateIndexType(){
 function getAirQualityData(){
     dateTimeRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Date-Time.json", function(json){
         dateTimeData = json;
-        dateTimeData.splice(0,1);
+        dateTimeData.shift();
     });
 
     otherRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Air-Quality.json", function(json){
         otherData = json;
-        otherData.splice(0,1);
-    });
+        otherData.shift();
+    });    
 
     $.when(dateTimeRequest, otherRequest).then(function(){
         data = {
@@ -128,12 +126,12 @@ function getAirQualityData(){
 function getSoilPhData(){
     dateTimeRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Date-Time.json", function(json){
         dateTimeData = json;
-        dateTimeData.splice(0,1);
+        dateTimeData.shift();
     });
 
     otherRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Soil-pH.json", function(json){
         otherData = json;
-        otherData.splice(0,1);
+        otherData.shift();
     });
 
     $.when(dateTimeRequest, otherRequest).then(function(){
@@ -167,12 +165,12 @@ function getSoilPhData(){
 function getSoilMoistureData(){
     dateTimeRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Date-Time.json", function(json){
         dateTimeData = json;
-        dateTimeData.splice(0,1);
+        dateTimeData.shift();
     });
 
     otherRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Soil-Moisture.json", function(json){
         otherData = json;
-        otherData.splice(0,1);
+        otherData.shift();
     });
 
     $.when(dateTimeRequest, otherRequest).then(function(){
@@ -206,12 +204,12 @@ function getSoilMoistureData(){
 function getTemperatureData(){
     dateTimeRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Date-Time.json", function(json){
         dateTimeData = json;
-        dateTimeData.splice(0,1);
+        dateTimeData.shift();
     });
 
     otherRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Temperature.json", function(json){
         otherData = json;
-        otherData.splice(0,1);
+        otherData.shift();
     });
 
     $.when(dateTimeRequest, otherRequest).then(function(){
@@ -245,12 +243,12 @@ function getTemperatureData(){
 function getHumidityData(){
     dateTimeRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Date-Time.json", function(json){
         dateTimeData = json;
-        dateTimeData.splice(0,1);
+        dateTimeData.shift();
     });
 
     otherRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Humidity.json", function(json){
         otherData = json;
-        otherData.splice(0,1);
+        otherData.shift();
     });
 
     $.when(dateTimeRequest, otherRequest).then(function(){
