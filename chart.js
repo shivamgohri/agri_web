@@ -64,6 +64,7 @@ function updateIndexType(){
 
     if(label == "Air Quality"){
         getAirQualityData();
+        updateTable();
     }
     else if(label == "Soil pH"){
         getSoilPhData();
