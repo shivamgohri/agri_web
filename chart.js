@@ -3,6 +3,8 @@ var otherData;
 var type = "line";
 var label = "Air Quality Index"
 
+var diseaseDetectionData, soilTextureData, weedPestData, yieldPredictionData;
+
 var dateTimeRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Date-Time.json", function(json){
     dateTimeData = json;
     dateTimeData.shift();
@@ -39,6 +41,7 @@ $.when(dateTimeRequest, otherRequest).then(function(){
         type: type,
         data: data,
     });
+    updateTable();
 });
 
 
@@ -68,18 +71,23 @@ function updateIndexType(){
     }
     else if(label == "Soil pH"){
         getSoilPhData();
+        updateTable();
     }
     else if(label == "Soil Moisture"){
         getSoilMoistureData();
+        updateTable();
     }
     else if(label == "Temperature"){
         getTemperatureData();
+        updateTable();
     }
     else if(label == "Humidity"){
         getHumidityData();
+        updateTable();
     }
     else if(label == "Prediction Models"){
         getPredictionModelsData();
+        updatePredictionTable();
     }
 
 }
@@ -285,8 +293,6 @@ function getPredictionModelsData(){
         dateTimeData = json;
         dateTimeData.splice(0,1);
     });
-
-    var diseaseDetectionData, soilTextureData, weedPestData, yieldPredictionData;
 
     otherRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Camera-Data-Analysis/Disease-Detection.json", function(json){
         diseaseDetectionData = json;
