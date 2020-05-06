@@ -1,6 +1,24 @@
 <html>
 
     <head>
+      <style>
+      .body {
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll; /* Add the ability to scroll */
+      }
+
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .body::-webkit-scrollbar {
+          display: none;
+      }
+
+      /* Hide scrollbar for IE and Edge */
+      .body {
+          -ms-overflow-style: none;
+      }
+      </style>
+
 
         <title>Live Data</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -11,76 +29,84 @@
         <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
         <script src="init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 
         <link href="login.css" rel="stylesheet" id="bootstrap-css">
 
     </head>
 
-    <body>
+    <body class="body">
 
-        <!--Nav Bar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <!--Nav Bar-->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-                <a class="navbar-brand" href="#">
-                    <img src="Resources/icon_logo.png" width="35px" height="35px" />
-                </a>
-                <a class="navbar-brand" href="#">
-                    Smart AGRI
-                </a>
+              <a class="navbar-brand" href="#">
+                  <img src="Resources/icon_logo.png" width="35px" height="35px" />
+              </a>
+              <a class="navbar-brand" href="#">
+                  Smart AGRI
+              </a>
 
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                  <li class="nav-item">
+                      <a class="nav-link" href="#"></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#"></a>
+                  </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html"> Home </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="home.html"> Home </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#"></a>
+                  </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="live.html">Live Data</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="live.html">Live Data</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#"></a>
+                  </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="weather.html">Weather</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="weather.html">Weather</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#"></a>
+                  </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="logs.html"> Logs </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="logs.html"> Logs </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#"></a>
+                  </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="guides.html"> Guides </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="guides.html"> Guides </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#"></a>
+                  </li>
 
-                    <li class="nav-item active">
-                        <a class="nav-link" href="login.html"> Log-in </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                </ul>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="login.html" id="logDIV"></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#"></a>
+                  </li>
+              </ul>
 
-            </div>
+              <div class="form-inline my-2 my-lg-0">
+                  <input class="form-inline my-2 my-lg-0 form-control mr-sm-2" id="searchInput" type="text" placeholder="Search" aria-label="Search"></input>
+                  <input value="Search" class="form-inline my-2 my-lg-0 btn btn-outline-success my-2 my-sm-0" id="searchButton" type="button" onclick="updateSearch()" ></input>
+              </div>
+              <script src="search.js"></script>
+
+          </div>
         </nav>
 
 
@@ -90,22 +116,25 @@
         <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
-
+            <br>
             <!-- Icon -->
             <div class="fadeIn first">
             <img src="Resources/icon_logo.png" id="icon"  alt="User Icon" />
             </div>
+            <br>
 
             <!-- Login Form -->
             <form>
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-                <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
-                <input type="submit" class="fadeIn fourth" value="Log In" >
+                <input type="search" id="farmerid" class="fadeIn second" placeholder="Farmer-Id">
+                <input type="search" id="username" class="fadeIn third" placeholder="Name">
+                <input type="password" id="password" class="fadeIn third" placeholder="Password"><br>
+                <input type="submit" class="fadeIn fourth" value="Log In" id="loginButton">
+                <script src="login.js"></script>
             </form>
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
-            <a class="underlineHover" href="#">Forgot Password?</a>
+            <a class="underlineHover" href="#" onclick="forgot()">Forgot Password?</a>
             </div>
 
         </div>

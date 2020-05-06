@@ -2,22 +2,22 @@ var userLatitude;
 var userLongitude;
 var locationAllowed = false;
 var api_key = "592f3e7d18b32b29308b281721d204fc";
-var data;
+// var data;
 
 
-// var data = {
-// "coord":{"lon":76,"lat":30},
-// "weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],
-// "base":"stations",
-// "main":{"temp":302.6,"feels_like":301.97,"temp_min":302.6,"temp_max":302.6,"pressure":1004,"humidity":33,"sea_level":1004,"grnd_level":979},
-// "wind":{"speed":1.56,"deg":34},
-// "clouds":{"all":0},
-// "dt":1588707507,
-// "sys":{"country":"IN","sunrise":1588723731,"sunset":1588772179},
-// "timezone":19800,     OFFSET IN SECONDS
-// "id":1272517,
-// "name":"Dirba",      CITY NAME
-// "cod":200} ;
+var data = {
+"coord":{"lon":76,"lat":30},
+"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],
+"base":"stations",
+"main":{"temp":302.6,"feels_like":301.97,"temp_min":302.6,"temp_max":302.6,"pressure":1004,"humidity":33,"sea_level":1004,"grnd_level":979},
+"wind":{"speed":1.56,"deg":34},
+"clouds":{"all":0},
+"dt":1588707507,
+"sys":{"country":"IN","sunrise":1588723731,"sunset":1588772179},
+"timezone":19800,    //OFFSET IN SECONDS
+"id":1272517,
+"name":"Dirba",      //CITY NAME
+"cod":200} ;
 
 
 
@@ -37,7 +37,7 @@ function getWeather(userLatitude, userLongitude, api_key){
   //   console.log(data);
   // });
 
-  $.when(weatherRequest).then(function(){
+  // $.when(weatherRequest).then(function(){
 
     var weather_icon_code = data.weather[0].icon;
     var iconurl = "http://openweathermap.org/img/w/" + weather_icon_code + ".png";
@@ -102,7 +102,7 @@ function getWeather(userLatitude, userLongitude, api_key){
                                "Current Day: " + current_day +"<br>" +
                                "END" );
 
-  });
+  // });
 
 }
 

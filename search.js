@@ -8,44 +8,76 @@ input.addEventListener("keyup", function(event) {
 
 var searchQuery;
 
+var availableTags = [
+    "Live Data",
+    "Weather",
+    "Logs",
+    "Model",
+    "Guides",
+    "Log In"];
+
+$(document).ready(function(){
+  $("#searchInput").autocomplete({
+      minLength: 0,
+      delay: 0,
+      source: availableTags,
+      select: function(event, ui) {
+        searchQuery = ui.item.label;
+        updateSearch();
+      }
+  });
+});
+
+$(document).ready(function(){
+  $("#searchInput").click(function() {
+    $("#searchInput").autocomplete( "search", "" );
+  })
+});
+
 $(document).ready(function(){
     $("#searchInput").on("keyup", function() {
-        
+
         var value = $(this).val().toLowerCase();
-      
+
         if(value == "guides" || value == "guide" || value == "help"){
-            searchQuery = "guides";
+            searchQuery = "Guides";
         }
         else if(value == "logs" || value == "log"){
-            searchQuery = "logs";
+            searchQuery = "Logs";
         }
         else if(value == "live data" || value == "data" || value == "live"){
-            searchQuery = "live data";
+            searchQuery = "Live Data";
         }
         else if(value == "home" || value == "model" || value == "predict"){
-            searchQuery = "home";
+            searchQuery = "Home";
         }
         else if(value == "log in" || value == "login" || value == "signin" || value == "sign in"){
-            searchQuery = "log in";
+            searchQuery = "Log In";
+        }
+        else if(value == "weather data" || value == "weather" || value == "temperature" || value == "live weather"){
+            searchQuery = "Weather";
         }
     });
 });
 
-function updateSearch(){ 
-    
-    if(searchQuery == "guides"){
+function updateSearch(){
+
+    if(searchQuery == "Guides"){
         location.href="guides.html";
     }
-    else if(searchQuery == "logs"){
+    else if(searchQuery == "Logs"){
         location.href="logs.html";
     }
-    else if(searchQuery == "live data"){
+    else if(searchQuery == "Live Data"){
         location.href="live.html";
     }
-    else if(searchQuery == "home"){
+    else if(searchQuery == "Model"){
         location.href="home.html";
     }
-    else if(searchQuery == "log in"){
+    else if(searchQuery == "Log In"){
         location.href="login.html";
+    }
+    else if(searchQuery == "Weather"){
+        location.href="weather.html";
     }
 }

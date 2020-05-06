@@ -1,6 +1,23 @@
 <html>
 
     <head>
+      <style>
+      .body {
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll; /* Add the ability to scroll */
+      }
+
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .body::-webkit-scrollbar {
+          display: none;
+      }
+
+      /* Hide scrollbar for IE and Edge */
+      .body {
+          -ms-overflow-style: none;
+      }
+      </style>
 
         <title>Live Data</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -11,10 +28,12 @@
         <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
         <script src="init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 
     </head>
 
-    <body>
+    <body class="body">
 
         <!--Nav Bar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
@@ -71,7 +90,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html"> Log-in </a>
+                        <a class="nav-link" href="login.html" id="logDIV"></a>
+                        <script src="login.js"></script>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"></a>
