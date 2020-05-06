@@ -1,26 +1,63 @@
 var userName;
 var farmer_id;
+var key;
+var nameData;
+var idData;
 
 $(document).ready(function() {
-  check(userName);
+  check();
 })
 
 function check(){
-  if(userName!="none"){
-    document.getElementById('logDIV').innerHTML = '';
-    document.getElementById('logDIV').innerHTML = "Log In";
+
+  var nameRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/Users.json", function(json){
+      nameData = json;
+  });
+
+  var idRequest = $.getJSON("https://smart-agriculture-deloitte.firebaseio.com/FarmerID.json", function(json){
+      idData = json;
+  });
+
+  $.when(nameRequest, idRequest).then(function() {
+    userName = nameData[nameData.length-1]
+    document.getElementById('logDIV').innerHTML = "Hi, " + userName + "!";
+  });
+
+}
+
+
+function push(){
+  if( username==undefined || farmer_id==undefined ){
+    alert("Type details!");
   }
   else{
-    document.getElementById('logDIV').innerHTML = '';
-    document.getElementById('logDIV').innerHTML = "Hi, " + userName + "!";
+    userName = $("#username").val();
+    farmer_id = $("#farmerid").val();
+
+    // firebase.database().ref('Users').push( userName );
+    // firebase.database().ref('FarmerID').push( farmer_id );
+
+    $("#username").val('');
+    $("#farmerid").val('');
+    $("#password").val('');
+
+    check();
+    location.href = "home.html";
   }
 }
 
+$("#username").change(function() {
+  userName = $("#username").val();
+});
+
+$("#farmerid").change(function() {
+  farmer_id = $("#farmerid").val();
+});
+
+
 $("#loginButton").on("click", function(evt) {
   evt.preventDefault();
-  userName = $("#username").val();
-  farmer_id = $("#farmerid").val();
-  isloggedin = true;
-  location.href="home.html";
-  check(userName);
+
+  push();
+
 });
