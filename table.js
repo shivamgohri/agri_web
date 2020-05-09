@@ -70,10 +70,11 @@ function updatePredictionTable(){
             var weedVal = weedPestData[index];
             var yieldVal = yieldPredictionData[index];
 
-            var markup = "<tr><td>" + i + "</td><td>" + date + "</td><td>" + diseaseVal + "</td><td>" + soilVal + "</td><td>" + weedVal + "</td><td>" + yieldVal + "</td></tr>";
+            var markup = "<tr><td class='sr'><input type='checkbox' class='rowButton' data-toggle='modal' data-target='#myModal'>" + i + "</td><td class='date'>" + date + "</td><td class='diseaseVal'>" + diseaseVal + "</td><td class='soilVal'>" + soilVal + "</td><td class='weedVal'>" + weedVal + "</td><td class='yieldVal'>" + yieldVal + "</td></tr>";
             $("table tbody").append(markup);
         }
 
+        getPredictionData();
     });
 }
 
@@ -93,7 +94,11 @@ function getRowData(){
       var markup = "" + $number + ". <br>" + label + " index at " + $date + " is " + $val + " !";
       $(".modalText").append(markup);
 
-      $("#closeModal").click(function() {
+      $("#closeModal1").click(function() {
+        $(".rowButton").removeAttr('checked');
+      });
+
+      $("#closeModal2").click(function() {
         $(".rowButton").removeAttr('checked');
       });
 
@@ -101,6 +106,35 @@ function getRowData(){
   });
 }
 
+function getPredictionData(){
+
+  $(".rowButton").change(function() {
+    if(this.checked){
+
+      var $row = $(this).closest("tr");    // Find the row
+      var $number = $row.find(".sr").text();
+      var $date = $row.find(".date").text();
+      var $diseaseVal = $row.find(".diseaseVal").text();
+      var $soilVal = $row.find(".soilVal").text();
+      var $weedVal = $row.find(".weedVal").text();
+      var $yieldVal = $row.find(".yieldVal").text();
+
+      $(".modalText").empty();
+
+      var markup = "" + $number + ". " + label + "<br>" + $date + "<br>" + "Disease Detection is " + $diseaseVal + " !<br>" + "Soil Texture is " + $soilVal + " !<br>" + "Weed Detection is " + $weedVal + " !<br>" + "Yield Prediction is " + $yieldVal + " !<br>";
+      $(".modalText").append(markup);
+
+      $("#closeModal1").click(function() {
+        $(".rowButton").removeAttr('checked');
+      });
+
+      $("#closeModal2").click(function() {
+        $(".rowButton").removeAttr('checked');
+      });
+
+    }
+  });
+}
 
 
 
