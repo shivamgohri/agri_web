@@ -1,3 +1,7 @@
+$(document).ready(function() {
+});
+
+
 function updateTable(){
     $.when(dateTimeRequest, otherRequest).then(function(){
 
@@ -34,11 +38,12 @@ function updateTable(){
             var i = index+1;
             var date = dateTimeData[index];
             var val = otherData[index];
-            
-            var markup = "<tr><td>" + i + "</td><td>" + date + "</td><td>" + val + "</td></tr>";
-            $("table tbody").append(markup);            
+
+            var markup = "<tr><td class='sr'><input type='checkbox' class='rowButton' data-toggle='modal' data-target='#myModal'/>" + i + "</td> <td class='date'>" + date + "</td> <td class='val'>" + val + "</td></tr>";
+            $("table tbody").append(markup);
         }
 
+        getRowData();
     });
 }
 
@@ -64,10 +69,51 @@ function updatePredictionTable(){
             var soilVal = soilTextureData[index];
             var weedVal = weedPestData[index];
             var yieldVal = yieldPredictionData[index];
-            
+
             var markup = "<tr><td>" + i + "</td><td>" + date + "</td><td>" + diseaseVal + "</td><td>" + soilVal + "</td><td>" + weedVal + "</td><td>" + yieldVal + "</td></tr>";
-            $("table tbody").append(markup);            
+            $("table tbody").append(markup);
         }
 
     });
 }
+
+
+function getRowData(){
+
+  $(".rowButton").change(function() {
+    if(this.checked){
+
+      var $row = $(this).closest("tr");    // Find the row
+      var $number = $row.find(".sr").text();
+      var $date = $row.find(".date").text();
+      var $val = $row.find(".val").text();
+
+      $(".modalText").empty();
+
+      var markup = "" + $number + ". <br>" + label + " index at " + $date + " is " + $val + " !";
+      $(".modalText").append(markup);
+
+      $("#closeModal").click(function() {
+        $(".rowButton").removeAttr('checked');
+      });
+
+    }
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//a
