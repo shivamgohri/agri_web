@@ -5,12 +5,12 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
     userEmail = user.email;
-
+    $("#loggedin").toast('show');
     document.getElementById('logDIV').innerHTML = "Hi, " + userEmail + "!";
-    document.getElementById('login_text').innerHTML = "You're logged in as : " + "<b>" + userEmail + "</b>" ;
 
   } else {
     // No user is signed in.
+    $("#login").toast('show');
     document.getElementById('logDIV').innerHTML = "Log-In";
   }
 });
@@ -33,6 +33,8 @@ $("#loginButton").on("click", function(evt) {
 });
 
 $("#logoutButton").on("click", function(evt) {
+  $("#email_field").val('');
+  $("#password_field").val('');
   firebase.auth().signOut();
 });
 
@@ -86,6 +88,8 @@ $("#reset").on("click", function(evt) {
 
   firebase.auth().sendPasswordResetEmail(emailAddress).then(function() {
     document.getElementById('forgot_status').innerHTML = "<font color='green'> Email Sent! ";
+    $("#emailSend").toast('show');
+    showlogin();
   }).catch(function(error) {
     document.getElementById('forgot_status').innerHTML = "<font color='red'> Email not Sent! Try Again!";
   });

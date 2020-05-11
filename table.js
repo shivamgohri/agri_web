@@ -91,7 +91,7 @@ function getRowData(){
 
       $(".modalText").empty();
 
-      var markup = "" + $number + ". <br>" + label + " index at " + $date + " is " + $val + " !";
+      var markup = "" + $number + ". <br><br>" + label + " index at <b>" + $date + "</b> is <b>" + $val + "</b> !";
       $(".modalText").append(markup);
 
       $("#closeModal1").click(function() {
