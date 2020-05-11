@@ -26,12 +26,41 @@ html {
     color: #cccccc;
   }
 
+  .login {
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+  }
+
+  .signup {
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+  }
+
+  .forgot {
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+  }
 
 
   /* STRUCTURE */
 
   .wrapper {
-    display: flex;
+    display: none;
     align-items: center;
     flex-direction: column;
     justify-content: center;

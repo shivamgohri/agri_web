@@ -111,37 +111,118 @@
 
 
 
+        <script>
+          firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              // User is signed in.
+              document.getElementById('wrapper_div').style.display = "none";
+              document.getElementById('login_div').style.display = "flex";
+              document.getElementById('signup_div').style.display = "none";
+              document.getElementById('forgot_div').style.display = "none";
+            } else {
+              // No user is signed in.
+              document.getElementById('signup_div').style.display = "none";
+              document.getElementById('wrapper_div').style.display = "flex";
+              document.getElementById('login_div').style.display = "none";
+              document.getElementById('forgot_div').style.display = "none";
+            }
+          });
+        </script>
         <!--login activity-->
+        <div id="wrapper_div" class="wrapper fadeInDown">
+          <div id="formContent">
+            <!-- Tabs Titles -->
+            <br>
+            <!-- Icon -->
+            <p id="login_status"></p>
+            <div class="fadeIn first">
+              <img src="Resources/icon_logo.png" id="icon"  alt="User Icon" />
+            </div>
+            <br>
+            <!-- Login Form -->
+            <form>
+                <input type="search" id="email_field" class="fadeIn third" placeholder="Email">
+                <input type="password" id="password_field" class="fadeIn third" placeholder="Password"><br>
+                <input type="submit" class="fadeIn fourth" value="Log In" id="loginButton">
+            </form>
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+              <a class="underlineHover" href="#" onclick="showforgot()">Forgot Password?</a>
+              <a class="underlineHover" href="#" onclick="showsignup()">Sign-Up</a>
+            </div>
+          </div>
+        </div>
 
-        <div class="wrapper fadeInDown">
-        <div id="formContent">
+
+        <!--LOGGED-IN-->
+        <div id="login_div" class="login fadeInDown">
+          <div id="formContent">
             <!-- Tabs Titles -->
             <br>
             <!-- Icon -->
             <div class="fadeIn first">
-            <img src="Resources/icon_logo.png" id="icon"  alt="User Icon" />
+              <img src="Resources/icon_logo.png" id="icon"  alt="User Icon" />
+            </div>
+            <br><br>
+            <!-- Login Form -->
+            <p id="login_text"></p>
+            <br><br>
+            <input type="submit" class="fadeIn fourth" value="Log Out" id="logoutButton">
+          </div>
+        </div>
+
+        <!--SIGN-UP-->
+        <div id="signup_div" class="signup fadeInDown">
+          <div id="formContent">
+            <!-- Tabs Titles -->
+            <br>
+            <!-- Icon -->
+            <p id="signup_status"></p>
+            <div class="fadeIn first">
+              <img src="Resources/icon_logo.png" id="icon"  alt="User Icon" />
             </div>
             <br>
-
             <!-- Login Form -->
             <form>
-                <input type="search" id="farmerid" class="fadeIn second" placeholder="Farmer-Id">
-                <input type="search" id="username" class="fadeIn third" placeholder="Name">
-                <input type="password" id="password" class="fadeIn third" placeholder="Password"><br>
-                <input type="submit" class="fadeIn fourth" value="Log In" id="loginButton">
-                <script src="login.js"></script>
+                <input type="search" id="email_field_signup" class="fadeIn third" placeholder="Email">
+                <input type="password" id="password_field_signup" class="fadeIn third" placeholder="Password"><br>
+                <input type="submit" class="fadeIn fourth" value="Sign Up" id="signupButton" onclick="show()">
             </form>
-
             <!-- Remind Passowrd -->
             <div id="formFooter">
-            <a class="underlineHover" href="#" onclick="forgot()">Forgot Password?</a>
+              <a class="underlineHover" href="#" onclick="showforgot()">Forgot Password?</a>
+              <a class="underlineHover" href="#" onclick="showlogin()">Log-In</a>
             </div>
-
+          </div>
         </div>
+
+
+        <!--FORGOT-->
+        <div id="forgot_div" class="forgot fadeInDown">
+          <div id="formContent">
+            <!-- Tabs Titles -->
+            <br>
+            <!-- Icon -->
+            <div class="fadeIn first">
+              <img src="Resources/icon_logo.png" id="icon"  alt="User Icon" />
+            </div>
+            <br>
+            <!-- Login Form -->
+            <p id="forgot_status">Enter your email below!</p>
+            <form>
+              <input type="search" id="forgot_id" class="fadeIn third" placeholder="Email">
+              <input type="submit" class="fadeIn fourth" value="Get Reset Link" id="reset">
+            </form>
+            <div id="formFooter">
+              <a class="underlineHover" href="#" onclick="showsignup()">Sign-up</a>
+              <a class="underlineHover" href="#" onclick="showlogin()">Log-In</a>
+            </div>
+          </div>
         </div>
 
 
 
 
+        <script src="login.js"></script>
     </body>
 </html>

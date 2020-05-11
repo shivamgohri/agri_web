@@ -34,6 +34,17 @@
     </head>
 
     <body class="body">
+      <script>
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+
+          } else {
+            // No user is signed in.
+            window.location.href = "login.html";
+          }
+        });
+      </script>
 
         <!--Nav Bar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
