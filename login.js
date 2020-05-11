@@ -41,7 +41,7 @@ function showsignup(){
   document.getElementById('signup_div').style.display = "flex";
   document.getElementById('login_div').style.display = "none";
   document.getElementById('wrapper_div').style.display = "none";
-  document.getElementById('forgot_id').style.display = "none";
+  document.getElementById('forgot_div').style.display = "none";
   document.getElementById('logDIV').innerHTML = "Sign-Up";
   document.getElementById('signup_status').innerHTML = "";
 }
@@ -51,17 +51,16 @@ function showlogin(){
   document.getElementById('signup_div').style.display = "none";
   document.getElementById('login_div').style.display = "none";
   document.getElementById('wrapper_div').style.display = "flex";
-  document.getElementById('forgot_id').style.display = "none";
+  document.getElementById('forgot_div').style.display = "none";
   document.getElementById('login_status').innerHTML = "";
   document.getElementById('logDIV').innerHTML = "Log-In";
 }
 
 function showforgot(){
-  $("#forgot_id").val('');
-  document.getElementById('forgot_div').style.display = "flex";
   document.getElementById('signup_div').style.display = "none";
   document.getElementById('login_div').style.display = "none";
   document.getElementById('wrapper_div').style.display = "none";
+  document.getElementById('forgot_div').style.display = "flex";
   document.getElementById('logDIV').innerHTML = "Forgot";
 }
 
