@@ -8,6 +8,7 @@ input.addEventListener("keyup", function(event) {
 
 var searchQuery;
 
+
 var availableTags = [
     "Live Data",
     "Weather",
@@ -63,21 +64,21 @@ $(document).ready(function(){
 function updateSearch(){
 
     if(searchQuery == "Guides"){
-        location.href="guides.html";
+        window.location.href = "/guides"
     }
     else if(searchQuery == "Logs"){
-        location.href="logs.html";
+        window.location.href = "/logs";
     }
     else if(searchQuery == "Live Data"){
-        location.href="live.html";
+        window.location.href = "/live";
     }
     else if(searchQuery == "Model"){
-        location.href="home.html";
+        window.location.href = "/home";
     }
     else if(searchQuery == "Log In"){
-        location.href="login.html";
+        window.location.href = "/login";
     }
     else if(searchQuery == "Weather"){
-        location.href="weather.html";
+        window.location.href = "/weather";
     }
 }

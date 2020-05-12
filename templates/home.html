@@ -27,7 +27,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
-        <script src="init.js"></script>
+        <script src="static/init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
         <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
         <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
@@ -42,17 +42,19 @@
 
           } else {
             // No user is signed in.
-            window.location.href = "login.html";
+            window.location.href = "{{ url_for('login') }}";
           }
         });
       </script>
+
+      
 
         <!--Nav Bar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
                 <a class="navbar-brand" href="#">
-                    <img src="Resources/icon_logo.png" width="35px" height="35px" />
+                    <img src="static/icon_logo.png" width="35px" height="35px" />
                 </a>
                 <a class="navbar-brand" href="#">
                     Smart AGRI
@@ -66,44 +68,44 @@
                         <a class="nav-link" href="#"></a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html"> Home </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="live.html">Live Data</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-
                     <li class="nav-item active">
-                        <a class="nav-link" href="weather.html">Weather</a>
+                        <a class="nav-link" href="{{ url_for('home') }}"> Home </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"></a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="logs.html"> Logs </a>
+                        <a class="nav-link" href="{{ url_for('live') }}">Live Data</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"></a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="guides.html"> Guides </a>
+                        <a class="nav-link" href="{{ url_for('weather') }}">Weather</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"></a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html" id="logDIV"></a>
-                        <script src="login.js"></script>
+                        <a class="nav-link" href="{{ url_for('logs') }}"> Logs </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('guides') }}"> Guides </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}" id="logDIV"></a>
+                        <script src="static/login.js"></script>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"></a>
@@ -114,22 +116,18 @@
                     <input class="form-inline my-2 my-lg-0 form-control mr-sm-2" id="searchInput" type="text" placeholder="Search" aria-label="Search"></input>
                     <input value="Search" class="form-inline my-2 my-lg-0 btn btn-outline-success my-2 my-sm-0" id="searchButton" type="button" onclick="updateSearch()" ></input>
                 </div>
-                <script src="search.js"></script>
+                <script src="static/search.js"></script>
 
             </div>
         </nav>
 
 
-        <img id="weather_icon" width="50px" height="50px" src=""></img>
-        <p id="weather_report"></p>
 
 
 
 
 
 
-
-        <script src="weather.js"></script>
 
     </body>
 </html>

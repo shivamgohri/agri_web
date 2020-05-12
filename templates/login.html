@@ -27,12 +27,12 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
-        <script src="init.js"></script>
+        <script src="static/init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
         <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
         <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 
-        <link href="login.css" rel="stylesheet" id="bootstrap-css">
+        <link href="static/login.css" rel="stylesheet" id="bootstrap-css">
 
     </head>
 
@@ -43,7 +43,7 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
               <a class="navbar-brand" href="#">
-                  <img src="Resources/icon_logo.png" width="35px" height="35px" />
+                  <img src="static/icon_logo.png" width="35px" height="35px" />
               </a>
               <a class="navbar-brand" href="#">
                   Smart AGRI
@@ -58,42 +58,42 @@
                   </li>
 
                   <li class="nav-item">
-                      <a class="nav-link" href="home.html"> Home </a>
+                      <a class="nav-link" href="{{ url_for('home') }}"> Home </a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="#"></a>
                   </li>
 
                   <li class="nav-item">
-                      <a class="nav-link" href="live.html">Live Data</a>
+                      <a class="nav-link" href="{{ url_for('live') }}">Live Data</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="#"></a>
                   </li>
 
                   <li class="nav-item">
-                      <a class="nav-link" href="weather.html">Weather</a>
+                      <a class="nav-link" href="{{ url_for('live') }}">Weather</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="#"></a>
                   </li>
 
                   <li class="nav-item">
-                      <a class="nav-link" href="logs.html"> Logs </a>
+                      <a class="nav-link" href="{{ url_for('logs') }}"> Logs </a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="#"></a>
                   </li>
 
                   <li class="nav-item">
-                      <a class="nav-link" href="guides.html"> Guides </a>
+                      <a class="nav-link" href="{{ url_for('guides') }}"> Guides </a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="#"></a>
                   </li>
 
                   <li class="nav-item active">
-                      <a class="nav-link" href="login.html" id="logDIV"></a>
+                      <a class="nav-link" href="{{ url_for('login') }}" id="logDIV"></a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="#"></a>
@@ -104,7 +104,7 @@
                   <input class="form-inline my-2 my-lg-0 form-control mr-sm-2" id="searchInput" type="text" placeholder="Search" aria-label="Search"></input>
                   <input value="Search" class="form-inline my-2 my-lg-0 btn btn-outline-success my-2 my-sm-0" id="searchButton" type="button" onclick="updateSearch()" ></input>
               </div>
-              <script src="search.js"></script>
+              <script src="static/search.js"></script>
 
           </div>
         </nav>
@@ -137,7 +137,7 @@
             <!-- Icon -->
             <p id="login_status"></p>
             <div class="fadeIn first">
-              <img src="Resources/icon_logo.png" id="icon"  alt="User Icon" />
+              <img src="static/icon_logo.png" id="icon"  alt="User Icon" />
             </div>
             <br>
             <!-- Login Form -->
@@ -162,12 +162,12 @@
             <br>
             <!-- Icon -->
             <div class="fadeIn first">
-              <img src="Resources/icon_logo.png" id="icon"  alt="User Icon" />
+              <img src="static/icon_logo.png" id="icon"  alt="User Icon" />
             </div>
             <br><br>
             <!-- Login Form -->
             <p id="login_text"></p>
-            <br><br>            
+            <br><br>
             <input type="submit" class="fadeIn fourth" value="Log Out" id="logoutButton">
           </div>
         </div>
@@ -180,7 +180,7 @@
             <!-- Icon -->
             <p id="signup_status"></p>
             <div class="fadeIn first">
-              <img src="Resources/icon_logo.png" id="icon"  alt="User Icon" />
+              <img src="static/icon_logo.png" id="icon"  alt="User Icon" />
             </div>
             <br>
             <!-- Login Form -->
@@ -205,7 +205,7 @@
             <br>
             <!-- Icon -->
             <div class="fadeIn first">
-              <img src="Resources/icon_logo.png" id="icon"  alt="User Icon" />
+              <img src="static/icon_logo.png" id="icon"  alt="User Icon" />
               <p id="forgot_status">Enter your email below!</p>
             </div>
             <!-- Login Form -->
@@ -227,7 +227,7 @@
           <div style="position: absolute; top: 70; right: 40;">
             <div id="login" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="true" data-delay="4000">
               <div class="toast-header">
-                <img src="Resources/icon_logo.png" class="rounded mr-2" height="30px" width="30px">
+                <img src="static/icon_logo.png" class="rounded mr-2" height="30px" width="30px">
                 <strong class="mr-auto">Smart AGRI &emsp; &emsp; &emsp; &emsp;</strong>
                 <small>now</small>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -250,7 +250,7 @@
           <div style="position: absolute; top: 70; right: 40;">
             <div id="loggedin" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="true" data-delay="4000">
               <div class="toast-header">
-                <img src="Resources/icon_logo.png" class="rounded mr-2" height="30px" width="30px">
+                <img src="static/icon_logo.png" class="rounded mr-2" height="30px" width="30px">
                 <strong class="mr-auto">Smart AGRI &emsp; &emsp; &emsp; &emsp;</strong>
                 <small>now</small>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -271,7 +271,7 @@
           <div style="position: absolute; top: 70; right: 40;">
             <div id="emailSend" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="true" data-delay="4000">
               <div class="toast-header">
-                <img src="Resources/icon_logo.png" class="rounded mr-2" height="30px" width="30px">
+                <img src="static/icon_logo.png" class="rounded mr-2" height="30px" width="30px">
                 <strong class="mr-auto">Smart AGRI &emsp; &emsp; &emsp; &emsp;</strong>
                 <small>now</small>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -290,6 +290,6 @@
 
 
 
-        <script src="login.js"></script>
+        <script src="static/login.js"></script>
     </body>
 </html>
