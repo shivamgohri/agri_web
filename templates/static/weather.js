@@ -2,22 +2,22 @@ var userLatitude;
 var userLongitude;
 var locationAllowed = false;
 var api_key = "592f3e7d18b32b29308b281721d204fc";
-// var data;
+var data;
 
 
-var data = {
-"coord":{"lon":76,"lat":30},
-"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],
-"base":"stations",
-"main":{"temp":302.6,"feels_like":301.97,"temp_min":302.6,"temp_max":302.6,"pressure":1004,"humidity":33,"sea_level":1004,"grnd_level":979},
-"wind":{"speed":1.56,"deg":34},
-"clouds":{"all":0},
-"dt":1588707507,
-"sys":{"country":"IN","sunrise":1588723731,"sunset":1588772179},
-"timezone":19800,    //OFFSET IN SECONDS
-"id":1272517,
-"name":"Dirba",      //CITY NAME
-"cod":200} ;
+// var data = {
+// "coord":{"lon":76,"lat":30},
+// "weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],
+// "base":"stations",
+// "main":{"temp":302.6,"feels_like":301.97,"temp_min":302.6,"temp_max":302.6,"pressure":1004,"humidity":33,"sea_level":1004,"grnd_level":979},
+// "wind":{"speed":1.56,"deg":34},
+// "clouds":{"all":0},
+// "dt":1588707507,
+// "sys":{"country":"IN","sunrise":1588723731,"sunset":1588772179},
+// "timezone":19800,    //OFFSET IN SECONDS
+// "id":1272517,
+// "name":"Dirba",      //CITY NAME
+// "cod":200} ;
 
 
 
@@ -29,9 +29,10 @@ $( document ).ready(function() {
 
 function getWeather(userLatitude, userLongitude, api_key){
 
+  // UN-COMMENT AT THE TIME OF DEVELOPMENT
   // var url = "https://api.openweathermap.org/data/2.5/weather?lat=" + userLatitude + "&lon=" + userLongitude + "&appid=" + api_key;
   // console.log(url);
-  //
+  
   // var weatherRequest = $.getJSON(url, function(json){
   //   data = json;
   //   console.log(data);
@@ -39,68 +40,90 @@ function getWeather(userLatitude, userLongitude, api_key){
 
   // $.when(weatherRequest).then(function(){
 
-    var weather_icon_code = data.weather[0].icon;
+    var weather_icon_code = data.weather[0].icon;        //
     var iconurl = "http://openweathermap.org/img/w/" + weather_icon_code + ".png";
-    $('#weather_icon').attr('src', iconurl);
+    $('#weather_icon').attr('src', iconurl);              //
 
-    var city_name = data.name;
-    var city_id = data.id;
-    var offset = data.timezone;
+    var city_name = data.name;       //
+    var city_id = data.id;               // 
+    var offset = data.timezone;         //
+    var converted_offset = offset/3600;       //
 
-    var country_name = data.sys.country;
+    var sign = "";                          //
+    if(converted_offset>0){
+      sign = "+";
+    }
+    else{
+      sign = "-";
+    }
+
+    var country_name = data.sys.country;        //
 
     if(country_name=="IN"){
       country_name = "India";
     }
 
-    var cloud_percentage = data.clouds.all + " %";
+    var cloud_percentage = data.clouds.all + " %";          //
     var sunrise_unix = data.sys.sunrise;
     var sunset_unix = data.sys.sunset;
     var current_unix = data.dt;
 
-    var min_temp = Math.trunc(data.main.temp_min - 273.15) + " degree Celcius";
-    var max_temp = Math.trunc(data.main.temp_max - 273.15) + " degree Celcius";
-    var current_temp = Math.trunc(data.main.feels_like - 273.15) + " degree Celcius";
+    var min_temp = Math.trunc(data.main.temp_min - 273.15) + " degree Celcius";         //
+    var max_temp = Math.trunc(data.main.temp_max - 273.15) + " degree Celcius";               //
+    var current_temp = Math.trunc(data.main.feels_like - 273.15) + " degree Celcius";          //
 
-    var pressure = data.main.pressure + " hPa";
-    var humidity = data.main.humidity + " %";
+    var pressure = data.main.pressure + " hPa";   //
+    var humidity = data.main.humidity + " %";     //
 
-    var ap_seaLevel = data.main.sea_level + " hPa";
-    var ap_grndLevel = data.main.grnd_level + " hPa";
+    var ap_seaLevel = data.main.sea_level + " hPa";     //
+    var ap_grndLevel = data.main.grnd_level + " hPa";       //
 
-    var wind = data.wind.speed + " metres/second : " + data.wind.deg + " degrees";
+    var wind = data.wind.speed + " metres/second : " + data.wind.deg + " degrees";      //
 
-    var weather_title = data.weather[0].main;
-    var weather_desciption = data.weather[0].description;
+    var weather_title = data.weather[0].main;   //
+    var weather_desciption = data.weather[0].description;   //
 
-    var sunrise_time = getTime(sunrise_unix);
-    var sunset_time = getTime(sunset_unix);
+    var sunrise_time = getTime(sunrise_unix);     //
+    var sunset_time = getTime(sunset_unix);       //
 
-    var current_date = getDate(current_unix);
-    var current_time = getTime(current_unix);
-    var current_day = getDay(current_unix);
+    var current_date = getDate(current_unix);       //
+    var current_time = getTime(current_unix);       //
+    var current_day = getDay(current_unix);         //
 
-    $("#weather_report").html( "City Name: " + city_name +"<br>" +
-                               "City id: " + city_id +"<br>" +
-                               "Offset: " + offset +"<br>" +
-                               "Country Name: " + country_name +"<br>" +
-                               "Cloud Percentage: " + cloud_percentage +"<br>" +
-                               "Minimum Temperature: " + min_temp +"<br>" +
-                               "Maximum Temperature: " + max_temp +"<br>" +
-                               "Current Temperature: " + current_temp +"<br>" +
-                               "Pressure: " + pressure +"<br>" +
-                               "Humidity: " + humidity +"<br>" +
-                               "Atmospheric Pressure at Sea Level: " + ap_seaLevel +"<br>" +
-                               "Atmospheric Pressure at Ground Level: " + ap_grndLevel +"<br>" +
-                               "Wind: " + wind +"<br>" +
-                               "Weather Title: " + weather_title +"<br>" +
-                               "Weather Description: " + weather_desciption +"<br>" +
-                               "Sunrise Time: " + sunrise_time +"<br>" +
-                               "Sunset Time: " + sunset_time +"<br>" +
-                               "Current Date: " + current_date +"<br>" +
-                               "Current Time: " + current_time +"<br>" +
-                               "Current Day: " + current_day +"<br>" +
-                               "END" );
+    // $("#weather_report").html( "City Name: " + city_name +"<br>" +
+    //                            "City id: " + city_id +"<br>" +
+    //                            "Offset: " + offset +"<br>" +
+    //                            "Country Name: " + country_name +"<br>" +
+    //                            "Cloud Percentage: " + cloud_percentage +"<br>" +
+    //                            "Minimum Temperature: " + min_temp +"<br>" +
+    //                            "Maximum Temperature: " + max_temp +"<br>" +
+    //                            "Current Temperature: " + current_temp +"<br>" +
+    //                            "Pressure: " + pressure +"<br>" +
+    //                            "Humidity: " + humidity +"<br>" +
+    //                            "Atmospheric Pressure at Sea Level: " + ap_seaLevel +"<br>" +
+    //                            "Atmospheric Pressure at Ground Level: " + ap_grndLevel +"<br>" +
+    //                            "Wind: " + wind +"<br>" +
+    //                            "Weather Title: " + weather_title +"<br>" +
+    //                            "Weather Description: " + weather_desciption +"<br>" +
+    //                            "Sunrise Time: " + sunrise_time +"<br>" +
+    //                            "Sunset Time: " + sunset_time +"<br>" +
+    //                            "Current Date: " + current_date +"<br>" +
+    //                            "Current Time: " + current_time +"<br>" +
+    //                            "Current Day: " + current_day +"<br>" +
+    //                            "END" );
+
+    $("#weatherSpinner").hide();
+
+    $("#cityName").html( city_name );
+    $("#countryName").html( country_name );
+    $("#cityDetails").html( "Id: " + city_id + "&emsp; Offset: " + offset + " (" + sign + converted_offset + ")" );
+    $("#tempDetails").html( "Max. Temperature: " + max_temp + "&emsp; Min. Temperature: " + min_temp + "&emsp; Current Temperature: " + current_temp );
+    $("#cloud").html( "Cloud: " + cloud_percentage + "&emsp; Pressure: " + pressure + "&emsp; Humidity: " + humidity );
+    $("#titleDetails").html( weather_title + ": " + weather_desciption );
+    $("#apDetails").html( "Atmospheric Pressure:" + "&emsp; Sea Level- " + ap_seaLevel + "&emsp; Ground Level- " + ap_grndLevel );
+    $("#windDetails").html( "Winds: " + wind );
+    $("#dayDetails").html( "Date: " + current_date + "&emsp; Time: " + current_time + "&emsp; Day: " + current_day );
+    $("#sunDetails").html( "Sunrise Time: " + sunrise_time + "&emsp; Sunset Time: " + sunset_time );
 
   // });
 

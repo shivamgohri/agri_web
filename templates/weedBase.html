@@ -1,0 +1,283 @@
+<html lang="en">
+
+    <head>
+        <style>
+        .body {
+          width: 100%;
+          height: 100%;
+          overflow-y: scroll; /* Add the ability to scroll */
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE and Edge */
+        .body {
+            -ms-overflow-style: none;
+        }
+
+        .testcases {
+          display: flex;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+
+          .block {
+            flex: 0 0 auto;
+          }
+        }
+        </style>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weed Detection</title>
+        <link rel="icon" type="image/png" sizes="32x32" href="static/icon_logo.png">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+        <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+        <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+        <link href="{{ url_for('static', filename='weedmain.css') }}" rel="stylesheet">
+        <script src="static/init.js"></script>
+
+    </head>
+
+    <body class="body">
+        <script>
+          firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              // User is signed in.
+
+            } else {
+              // No user is signed in.
+              window.location.href = "{{ url_for('login') }}";
+            }
+          });
+        </script>
+
+        <!--Nav Bar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+                <a class="navbar-brand" href="#">
+                    <img src="static/icon_logo.png" width="35px" height="35px" />
+                </a>
+                <a class="navbar-brand" href="#">
+                    Smart AGRI
+                </a>
+
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}"> Home </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('live') }}">Live Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('weather') }}">Weather</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logs') }}"> Logs </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('guides') }}"> Guides </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}" id="logDIV"></a>
+                        <script src="static/login.js"></script>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                </ul>
+
+                <div class="form-inline my-2 my-lg-0">
+                    <input class="form-inline my-2 my-lg-0 form-control mr-sm-2" id="searchInput" type="text" placeholder="Search" aria-label="Search"></input>
+                    <input value="Search" class="form-inline my-2 my-lg-0 btn btn-outline-success my-2 my-sm-0" id="searchButton" type="button" onclick="updateSearch()" ></input>
+                </div>
+                <script src="static/search.js"></script>
+
+            </div>
+        </nav>
+
+
+
+
+        <div class="row justify-content-center" style="margin-top:2em">
+          <div><font size="4"><b>Testcases for Predictions!</b></font></div>
+        </div>
+
+
+
+        <!-- TESTCASES SLIDE -->
+        <div class="testcases" style="margin-top:1em">
+
+            <div class="block">
+                <div class="card text-white bg-dark mb-3" style="width: 7.5rem; margin-left: 2em;">
+                  <img class="card-img-top" src="static/11.jpg">
+                  <div class="card-body justify-content-center">
+                    <a class="card-title">Card title</a>
+                    <a class="btn btn-outline-success btn-sm" id="weed_test1">Predict!</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="card text-white bg-dark mb-3" style="width: 7.5rem; margin-left: 2em;">
+                  <img class="card-img-top" src="static/11.jpg">
+                  <div class="card-body justify-content-center">
+                    <a class="card-title">Card title</a>
+                    <a class="btn btn-outline-success btn-sm" id="weed_test2">Predict!</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="card text-white bg-dark mb-3" style="width: 7.5rem; margin-left: 2em;">
+                  <img class="card-img-top" src="static/11.jpg">
+                  <div class="card-body justify-content-center">
+                    <a class="card-title">Card title</a>
+                    <a class="btn btn-outline-success btn-sm" id="weed_test3">Predict!</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="card text-white bg-dark mb-3" style="width: 7.5rem; margin-left: 2em;">
+                  <img class="card-img-top" src="static/11.jpg">
+                  <div class="card-body justify-content-center">
+                    <a class="card-title">Card title</a>
+                    <a class="btn btn-outline-success btn-sm" id="weed_test4">Predict!</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="card text-white bg-dark mb-3" style="width: 7.5rem; margin-left: 2em;">
+                  <img class="card-img-top" src="static/11.jpg">
+                  <div class="card-body justify-content-center">
+                    <a class="card-title">Card title</a>
+                    <a class="btn btn-outline-success btn-sm" id="weed_test5">Predict!</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="card text-white bg-dark mb-3" style="width: 7.5rem; margin-left: 2em;">
+                  <img class="card-img-top" src="static/11.jpg">
+                  <div class="card-body justify-content-center">
+                    <a class="card-title">Card title</a>
+                    <a class="btn btn-outline-success btn-sm" id="weed_test6">Predict!</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="card text-white bg-dark mb-3" style="width: 7.5rem; margin-left: 2em;">
+                  <img class="card-img-top" src="static/11.jpg">
+                  <div class="card-body justify-content-center">
+                    <a class="card-title">Card title</a>
+                    <a class="btn btn-outline-success btn-sm" id="weed_test7">Predict!</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="card text-white bg-dark mb-3" style="width: 7.5rem; margin-left: 2em;">
+                  <img class="card-img-top" src="static/11.jpg">
+                  <div class="card-body justify-content-center">
+                    <a class="card-title">Card title</a>
+                    <a class="btn btn-outline-success btn-sm" id="weed_test8">Predict!</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="card text-white bg-dark mb-3" style="width: 7.5rem; margin-left: 2em;">
+                  <img class="card-img-top" src="static/11.jpg">
+                  <div class="card-body justify-content-center">
+                    <a class="card-title">Card title</a>
+                    <a class="btn btn-outline-success btn-sm" id="weed_test9">Predict!</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="card text-white bg-dark mb-3" style="width: 7.5rem; margin-left: 2em;">
+                  <img class="card-img-top" src="static/11.jpg">
+                  <div class="card-body justify-content-center">
+                    <a class="card-title">Card title</a>
+                    <a class="btn btn-outline-success btn-sm" id="weed_test10">Predict!</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="card text-white bg-dark mb-3" style="width: 7.5rem; margin-left: 2em;">
+                  <img class="card-img-top" src="static/11.jpg">
+                  <div class="card-body justify-content-center">
+                    <a class="card-title">Card title</a>
+                    <a class="btn btn-outline-success btn-sm" id="weed_test11">Predict!</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="card text-white bg-dark mb-3" style="width: 7.5rem; margin-left: 2em; margin-right: 2em;">
+                  <img class="card-img-top" src="static/11.jpg">
+                  <div class="card-body justify-content-center">
+                    <a class="card-title">Card title</a>
+                    <a class="btn btn-outline-success btn-sm" id="weed_test12">Predict!</a>
+                  </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="container">
+            <div id="content" style="margin-top:2em">{% block content %}{% endblock %}</div>
+        </div>
+
+        <br><br><br><br>
+
+
+    </body>
+
+    <footer>
+        <script src="{{ url_for('static', filename='weedmain.js') }}" type="text/javascript"></script>
+    </footer>
+
+</html>

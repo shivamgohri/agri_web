@@ -22,7 +22,12 @@ $("#loginButton").on("click", function(evt) {
   var email = $("#email_field").val();
   var password = $("#password_field").val();
 
-  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(function(firebaseUser) {
+       // Success 
+       window.location.href = "/live";
+    })
+    .catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;

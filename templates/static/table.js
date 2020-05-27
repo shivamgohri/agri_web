@@ -43,6 +43,8 @@ function updateTable(){
             $("table tbody").append(markup);
         }
 
+        $("#tableSpinner").hide();
+
         getRowData();
     });
 }
@@ -73,6 +75,8 @@ function updatePredictionTable(){
             var markup = "<tr><td class='sr'><input type='checkbox' class='rowButton' data-toggle='modal' data-target='#myModal'>" + i + "</td><td class='date'>" + date + "</td><td class='diseaseVal'>" + diseaseVal + "</td><td class='soilVal'>" + soilVal + "</td><td class='weedVal'>" + weedVal + "</td><td class='yieldVal'>" + yieldVal + "</td></tr>";
             $("table tbody").append(markup);
         }
+
+        $("#tableSpinner").hide();
 
         getPredictionData();
     });
