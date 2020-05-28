@@ -33,7 +33,7 @@ config = {
 firebase = pyrebase.initialize_app(config)
 
 #flask init
-app = Flask(__name__, static_folder="templates/static", template_folder="templates")
+app = Flask(__name__, static_folder="static", template_folder="templates")
 
 #port init
 port = int(os.getenv('PORT', 8000))
@@ -46,6 +46,21 @@ port = int(os.getenv('PORT', 8000))
 @app.route('/')
 def default():
 	return home()
+
+
+#ERROR HANDLER
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html")
+
+
+@app.errorhandler(500)
+def page_error(e):
+    return render_template("500.html")
+
+@app.route('/favicon.ico')
+def send_icon():
+    return app.send_static_file("favicon.ico")
 
 
 #Static routes
@@ -141,7 +156,7 @@ def pestupload():
 def getpestresult():
     if request.method == 'POST':
         number = request.args.get('id')
-        path = r'templates\static\pest_testcases\{}.jpg'.format(number)
+        path = r'static/pest_testcases/{}.jpg'.format(number)
         preds = detect_pest(path)
         result ="No. of pests detected : " + preds
         print(result)
@@ -153,7 +168,7 @@ def getpestresult():
 def getweedresult():
     if request.method == 'POST':
         number = request.args.get('id')
-        path = r'templates\static\weed_testcases\{}.jpg'.format(number)
+        path = r'static/weed_testcases/{}.jpg'.format(number)
         preds = weed(path)
         return preds
     return None
@@ -313,4 +328,4 @@ def detect_pest(img_path):
 ####################INITIALIZE###########################
 
 if __name__ == "__main__":
-  app.run(host='0.0.0.0', port=port, debug=False)
+  app.run(host='0.0.0.0', port=port, debug=False, threaded=False)

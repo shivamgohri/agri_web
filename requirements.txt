@@ -1,0 +1,11 @@
+flask==1.1.2
+gunicorn==20.0.4
+pyrebase==3.0.27
+pycryptodome==3.4.3
+numpy==1.18.4
+pillow==6.2.1
+gevent==20.5.0
+gevent-ws==2.1.0
+opencv-python==4.2.0.34
+matplotlib==3.2.1
+scipy==1.4.1

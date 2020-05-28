@@ -69,6 +69,8 @@ function showImage() {
     storageRef.child('logs.pdf').getDownloadURL().then(function(url) {
         var test = url;
         document.querySelector('iframe').src = test;
+        $("#logFrame").show();
+        $("#LOGspinner").hide();
 
     }).catch(function(error) {
 
