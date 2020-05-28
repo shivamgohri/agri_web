@@ -33,7 +33,7 @@ config = {
 firebase = pyrebase.initialize_app(config)
 
 #flask init
-app = Flask(__name__, static_folder="static", template_folder="templates")
+app = Flask(__name__)
 
 #port init
 port = int(os.getenv('PORT', 8000))
