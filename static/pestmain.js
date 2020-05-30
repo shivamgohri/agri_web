@@ -45,9 +45,9 @@ $(document).ready(function () {
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var count = data.count; var text = data.text; var pixels = data.num; var total_pixels = data.total; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -61,18 +61,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/pesttest?id=1',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var count = data.count; var text = data.text; var pixels = data.num; var total_pixels = data.total; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -87,18 +86,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/pesttest?id=2',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var count = data.count; var text = data.text; var pixels = data.num; var total_pixels = data.total; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -112,18 +110,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/pesttest?id=3',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var count = data.count; var text = data.text; var pixels = data.num; var total_pixels = data.total; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -137,18 +134,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/pesttest?id=4',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var count = data.count; var text = data.text; var pixels = data.num; var total_pixels = data.total; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -162,18 +158,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/pesttest?id=5',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var count = data.count; var text = data.text; var pixels = data.num; var total_pixels = data.total; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -187,18 +182,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/pesttest?id=6',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var count = data.count; var text = data.text; var pixels = data.num; var total_pixels = data.total; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -211,18 +205,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/pesttest?id=7',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var count = data.count; var text = data.text; var pixels = data.num; var total_pixels = data.total; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -235,18 +228,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/pesttest?id=8',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var count = data.count; var text = data.text; var pixels = data.num; var total_pixels = data.total; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -259,18 +251,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/pesttest?id=9',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var count = data.count; var text = data.text; var pixels = data.num; var total_pixels = data.total; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -283,18 +274,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/pesttest?id=10',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var count = data.count; var text = data.text; var pixels = data.num; var total_pixels = data.total; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -307,18 +297,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/pesttest?id=11',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var count = data.count; var text = data.text; var pixels = data.num; var total_pixels = data.total; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -331,18 +320,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/pesttest?id=12',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var count = data.count; var text = data.text; var pixels = data.num; var total_pixels = data.total; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });

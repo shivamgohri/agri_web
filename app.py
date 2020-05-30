@@ -141,32 +141,29 @@ def pestupload():
 
         # Make prediction
         preds = detect_pest(file_path)
-        result ="No. of pests detected : "+preds
 
         # Process your result for human
         # pred_class = preds.argmax(axis=-1)            # Simple argmax
         #pred_class = decode_predictions(preds, top=1)   # ImageNet Decode
         #result = str(pred_class[0][0][1])               # Convert to string
-        return result
+        return preds
     return None
 
 
 #testcases routes
-@app.route('/pesttest', methods=['POST'])
+@app.route('/pesttest', methods=['GET'])
 def getpestresult():
-    if request.method == 'POST':
+    if request.method == 'GET':
         number = request.args.get('id')
         path = r'static/pest_testcases/{}.jpg'.format(number)
         preds = detect_pest(path)
-        result ="No. of pests detected : " + preds
-        print(result)
-        return result
+        return preds
     return None
 
 
-@app.route('/weedtest', methods=['POST'])
+@app.route('/weedtest', methods=['GET'])
 def getweedresult():
-    if request.method == 'POST':
+    if request.method == 'GET':
         number = request.args.get('id')
         path = r'static/weed_testcases/{}.jpg'.format(number)
         preds = weed(path)
@@ -238,6 +235,8 @@ def getData():
 #weed functions
 def detect_weed(img_path):
     img = cv2.imread(img_path)
+    width, height = Image.open(img_path).size
+    total_pixels = width*height
     #cv2_imshow(img)
     gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     #cv2_imshow(gray_image)
@@ -251,23 +250,33 @@ def detect_weed(img_path):
     img_dilation = cv2.dilate(img_erosion, arr, iterations=1)
     n_white_pix = numpy.sum(img_dilation == 255)
     print('Number of white pixels:', n_white_pix)
-    if n_white_pix >= 10000:
+    if n_white_pix >= 15000:
         asd=1
     else:
         asd=0
-    return asd
+    return [asd, n_white_pix, total_pixels]
 
 
 def weed(img_path):
     x = detect_weed(img_path); time.sleep(3)
     y=detect_weed(img_path); time.sleep(3)
-    suma=x+y
+    suma=[x[0]+y[0],max(x[1],y[1]), max(x[2], y[2])]
 
-    if suma>=1:
-        return "Presence of weed detected"
+    if suma[0]>=1:
+        res={
+        'num': int(suma[1]),
+        'text':"Presence of weed found",
+        'total' : int(suma[2])
+        }
     else:
-        return "Weed not present"
-    print("task completed")
+        res={
+        'num': int(suma[1]),
+        'text':"Weed not found",
+        'total': int(suma[2])
+        }
+
+    print(res)
+    return res
 
 
 #pests functions
@@ -280,6 +289,7 @@ def conversion(img_path):
     #cv2_imshow(gray_image)
     cv2.waitKey(0)                 # Waits forever for user to press any key
     cv2.destroyAllWindows()
+
 def gaussian():
     image = cv2.imread('gray_image.png')
     cv2.getGaussianKernel(9,9)
@@ -288,8 +298,20 @@ def gaussian():
     #cv2_imshow(blur)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+def averagefilter():
+    image=cv2.imread('blur.png')
+    kernel=np.ones((5,5),np.float32)/25
+    dst= cv2.filter2D(image,-1,kernel)
+    #plt.subplot(121),plt.imshow(image),plt.title('blur')
+    #plt.xticks([]), plt.yticks([])
+    #plt.subplot(122),plt.imshow(dst),plt.title('averaged')
+    #plt.xticks([]), plt.yticks([])
+    #plt.show()
+    cv2.imwrite('averaged.png',dst)
+
 def segmentation():
-    image = cv2.imread('blur.png')
+    image = cv2.imread('averaged.png')
     gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
     ret, thresh = cv2.threshold(gray,0,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
     cv2.imwrite('thresh_image.jpg',thresh)
@@ -318,14 +340,23 @@ def segmentation():
 
 def detect_pest(img_path):
     conversion(img_path)
+    array = detect_weed(img_path)
     gaussian()
-    ans=segmentation()
-    return str(ans)
+    averagefilter()
+    count = segmentation()
 
+    res = {
+        'text': "No. of Pest Detected ",
+        'count': int(count),
+        'num': int(array[1]),
+        'total': int(array[2])
+    }
+
+    return res
 
 
 
 ####################INITIALIZE###########################
 
 if __name__ == "__main__":
-  app.run(host='0.0.0.0', port=port, debug=False, threaded=False)
+  app.run(port=port, debug=False, threaded=False)

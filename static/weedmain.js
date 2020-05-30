@@ -45,9 +45,9 @@ $(document).ready(function () {
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var pixels = data.num; var total_pixels = data.total; var result = data.text; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -62,18 +62,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/weedtest?id=1',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var pixels = data.num; var total_pixels = data.total; var result = data.text; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -88,18 +87,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/weedtest?id=2',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var pixels = data.num; var total_pixels = data.total; var result = data.text; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -113,18 +111,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/weedtest?id=3',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var pixels = data.num; var total_pixels = data.total; var result = data.text; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -138,18 +135,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/weedtest?id=4',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var pixels = data.num; var total_pixels = data.total; var result = data.text; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -163,18 +159,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/weedtest?id=5',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var pixels = data.num; var total_pixels = data.total; var result = data.text; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -188,18 +183,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/weedtest?id=6',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var pixels = data.num; var total_pixels = data.total; var result = data.text; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -212,18 +206,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/weedtest?id=7',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var pixels = data.num; var total_pixels = data.total; var result = data.text; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -236,18 +229,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/weedtest?id=8',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var pixels = data.num; var total_pixels = data.total; var result = data.text; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -260,18 +252,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/weedtest?id=9',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var pixels = data.num; var total_pixels = data.total; var result = data.text; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -284,18 +275,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/weedtest?id=10',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var pixels = data.num; var total_pixels = data.total; var result = data.text; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -308,18 +298,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/weedtest?id=11',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var pixels = data.num; var total_pixels = data.total; var result = data.text; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
@@ -332,18 +321,17 @@ $(document).ready(function () {
         $('#TestImage').show();
         $('#imagePreview').hide();
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/weedtest?id=12',
-            data: "hey",
             contentType: false,
             cache: false,
             processData: false,
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                var pixels = data.num; var total_pixels = data.total; var result = data.text; $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
+                $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
                 console.log('Success!');
             },
         });
