@@ -64,7 +64,7 @@ $(document).ready(function(){
 function updateSearch(){
 
     if(searchQuery == "Guides"){
-        window.location.href = "/guides"
+        window.location.href = "/guides";
     }
     else if(searchQuery == "Logs"){
         window.location.href = "/logs";

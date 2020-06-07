@@ -15,6 +15,7 @@ import pylab
 from scipy import ndimage
 from flask import *
 import pyrebase
+from flask_mail import Mail, Message
 
 
 #firebase configuration
@@ -34,6 +35,18 @@ firebase = pyrebase.initialize_app(config)
 
 #flask init
 app = Flask(__name__)
+
+#Flask-mail setup
+app.config.update(
+    DEBUG=True,
+    #EMAIL SETTINGS
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=465,
+    MAIL_USE_SSL=True,
+    MAIL_USERNAME = 'smartagriculturedeloitte@gmail.com',
+    MAIL_PASSWORD = 'deloitteintelliJ'
+    )
+mail = Mail(app)
 
 #port init
 port = int(os.getenv('PORT', 8000))
@@ -88,6 +101,35 @@ def weather():
 def guides():
 	return render_template("guides.html")
 
+
+#mail route
+@app.route('/sendmail', methods=['GET', 'POST'])
+def send_mail():
+    if request.method == 'POST':
+        mailId = request.args.get('id')
+        #message body
+        msg = Message("Logs Data : Smart AGRI !",
+              sender = "smartagriculturedeloitte@gmail.com",
+              recipients = [mailId, "smartagriculturedeloitte@gmail.com"])
+        msg.body = "Hey {}, \n \nAttached pdf consists of all the Logs Data as requested by you. \nWe are really happy to connect with you. Have a great day. \n \nIf you are encountering any issue, please write to us at smartagriculturedeloitte@gmai.com \n \nRegards, \nSmart AGRI".format(mailId)  
+        curr = os.getcwd()
+        response = download_pdf()
+
+        if response == 0:
+            result = {
+                'success': 0
+            }
+            return result
+
+        with open(curr+"/files/logs.pdf",'rb') as p:
+            msg.attach(filename="logs.pdf",disposition="attachment",content_type="application/pdf",data=p.read())       
+        mail.send(msg)
+
+        ans = {
+            'success': 1
+        }
+        return ans
+    return None
 
 #weed routes
 @app.route('/weed', methods=['GET'])
@@ -354,6 +396,15 @@ def detect_pest(img_path):
 
     return res
 
+#mail function
+def download_pdf():
+    storage = firebase.storage()
+    curr = os.getcwd()
+    try:
+        storage.child('logs.pdf').download( curr + "/files/logs.pdf")
+        return 1
+    except:
+        return 0
 
 
 ####################INITIALIZE###########################

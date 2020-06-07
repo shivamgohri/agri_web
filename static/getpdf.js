@@ -2,6 +2,44 @@ $("#pdfButton").click(function() {
     downloadPdf();
 });
 
+$("#sendMailButton").click(function() {
+
+    $("#mailSpinner").show();
+
+    var emailId;
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            $.ajax({
+                type: 'POST',
+                url: '/sendmail?id=' + user.email,
+                contentType: false,
+                cache: false,
+                processData: false,
+                async: true,
+                success: function (data) {
+
+                    var success = data.success;
+
+                    $("#mailSpinner").hide();
+
+                    if( success==0 ){
+                        $("#sendMailToastFail").toast('show');
+                    }
+                    else{
+                        $("#sendMailToastSuccess").toast('show');
+                    }
+
+                },
+            });
+        }
+        else{
+            window.location.href = "/login";
+        }
+    });
+
+});
+
 function downloadPdf(){
     var doc = new jsPDF('p','pt','a4')
 
