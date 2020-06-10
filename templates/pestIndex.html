@@ -16,14 +16,26 @@
             </div>
         </div>
         <div>
-            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
+            <button type="button" class="btn btn-outline-dark btn-lg " id="btn-predict">Predict!</button>
         </div>
     </div>
     <img id="TestImage" height="256px">
 
-    <div class="loader" style="display:initial;"></div>
+    <!--pestspinner-->
+    <div class="row justify-content-center" id="pestSpinner" style="margin-top: 2em;">
+        <div class="spinner-border text-secondary" role="status"></div>
+    </div>
+
     <br>
-    <h3 id="result">
-        <span> </span>
-    </h3>
+    <div class="container" id="result">
+        <!-- <h3 id="result">
+            <span> </span>
+        </h3> -->
+    </div>
+
+    <br><br>
+
+    <div class="row justify-content-center" id="imagePlots" >
+    </div>
+
 {% endblock %}

@@ -10,7 +10,9 @@ from gevent.pywsgi import WSGIServer
 import cv2
 import numpy
 import time
-from matplotlib import pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 import pylab
 from scipy import ndimage
 from flask import *
@@ -50,6 +52,10 @@ mail = Mail(app)
 
 #port init
 port = int(os.getenv('PORT', 8000))
+
+#picId declare
+pestPicId = 0
+weedPicId = 0
 
 
 
@@ -131,63 +137,67 @@ def send_mail():
         return ans
     return None
 
+#disease routes
+@app.route('/disease')
+def disease():
+    return "Will be added soon"
+
 #weed routes
 @app.route('/weed', methods=['GET'])
-def weedindex():
+def weed():
     return render_template('weedIndex.html')
 
 
 @app.route('/predictweed', methods=['GET', 'POST'])
 def weedupload():
     if request.method == 'POST':
-        # Get the file from post request
-        f = request.files['file']
+        global weedPicId
+        weedPicId += 1
 
-        # Save the file to ./uploads
+        if weedPicId!=1:
+            tempId = weedPicId - 1
+            path = 'static/results'
+            tempname = 'w_graph_{}.jpg'.format(tempId)
+            os.remove(os.path.join(path , tempname))
+
+        f = request.files['file']
         basepath = os.path.dirname(__file__)
         file_path = os.path.join(
             basepath, 'weed_uploads', secure_filename(f.filename))
         f.save(file_path)
-        print(file_path)
-
-        # Make prediction
         preds = weed(file_path)
-        print(preds)
-
-        # Process your result for human
-        # pred_class = preds.argmax(axis=-1)            # Simple argmax
-        #pred_class = decode_predictions(preds, top=1)   # ImageNet Decode
-        #result = str(pred_class[0][0][1])               # Convert to string
-        return preds
+        os.remove(file_path)
+        return jsonify(preds)
     return None
 
 
 #pests routes
 @app.route('/pest', methods=['GET'])
-def pestindex():
+def pest():
     return render_template('pestIndex.html')
 
 
 @app.route('/predictpest', methods=['GET', 'POST'])
 def pestupload():
     if request.method == 'POST':
-        # Get the file from post request
-        f = request.files['file']
+        global pestPicId
+        pestPicId += 1
 
-        # Save the file to ./uploads
+        if pestPicId!=1:
+            tempid = pestPicId - 1
+            path = 'static/results'
+            tempname1 = 'p_graph_{}.jpg'.format(tempid)
+            tempname2 = 'p_subplot_{}.jpg'.format(tempid)
+            os.remove(os.path.join(path , tempname2))
+            os.remove(os.path.join(path , tempname1))
+
+        f = request.files['file']
         basepath = os.path.dirname(__file__)
         file_path = os.path.join(
             basepath, 'pest_uploads', secure_filename(f.filename))
         f.save(file_path)
-        print(file_path)
-
-        # Make prediction
         preds = detect_pest(file_path)
-
-        # Process your result for human
-        # pred_class = preds.argmax(axis=-1)            # Simple argmax
-        #pred_class = decode_predictions(preds, top=1)   # ImageNet Decode
-        #result = str(pred_class[0][0][1])               # Convert to string
+        os.remove(file_path)
         return preds
     return None
 
@@ -196,6 +206,17 @@ def pestupload():
 @app.route('/pesttest', methods=['GET'])
 def getpestresult():
     if request.method == 'GET':
+        global pestPicId
+        pestPicId += 1
+
+        if pestPicId!=1:
+            tempid = pestPicId - 1
+            path = 'static/results'
+            tempname1 = 'p_graph_{}.jpg'.format(tempid)
+            tempname2 = 'p_subplot_{}.jpg'.format(tempid)
+            os.remove(os.path.join(path , tempname2))
+            os.remove(os.path.join(path , tempname1))
+
         number = request.args.get('id')
         path = r'static/pest_testcases/{}.jpg'.format(number)
         preds = detect_pest(path)
@@ -206,6 +227,15 @@ def getpestresult():
 @app.route('/weedtest', methods=['GET'])
 def getweedresult():
     if request.method == 'GET':
+        global weedPicId
+        weedPicId += 1
+
+        if weedPicId!=1:
+            tempId = weedPicId - 1
+            path = 'static/results'
+            tempname = 'w_graph_{}.jpg'.format(tempId)
+            os.remove(os.path.join(path , tempname))
+
         number = request.args.get('id')
         path = r'static/weed_testcases/{}.jpg'.format(number)
         preds = weed(path)
@@ -279,19 +309,14 @@ def detect_weed(img_path):
     img = cv2.imread(img_path)
     width, height = Image.open(img_path).size
     total_pixels = width*height
-    #cv2_imshow(img)
     gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    #cv2_imshow(gray_image)
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    #cv2_imshow(hsv)
     mask = cv2.inRange(hsv,(36, 0, 0), (86, 255, 255) )
-    #cv2_imshow(mask)
     arr = numpy.ones([5,5],numpy.uint8)
     img_erosion = cv2.erode(mask, arr, iterations=1)
-    #cv2_imshow(img_erosion)
     img_dilation = cv2.dilate(img_erosion, arr, iterations=1)
     n_white_pix = numpy.sum(img_dilation == 255)
-    print('Number of white pixels:', n_white_pix)
+
     if n_white_pix >= 15000:
         asd=1
     else:
@@ -300,21 +325,39 @@ def detect_weed(img_path):
 
 
 def weed(img_path):
+    global weedPicId
     x = detect_weed(img_path); time.sleep(3)
     y=detect_weed(img_path); time.sleep(3)
     suma=[x[0]+y[0],max(x[1],y[1]), max(x[2], y[2])]
 
+    print(suma)
+
+    y_units=[suma[1],suma[2]]
+    x_units=[1,2]
+    labels=['White pixels','Total pixels']
+    plt.bar(x_units,y_units,tick_label=labels,width=0.4,align='center',color=['blue','green'])
+    plt.xlabel('x - axis')
+    plt.ylabel('Number of pixels')
+    path = 'static/results'
+    name = 'w_graph_{}.jpg'.format(weedPicId)
+    plt.savefig(os.path.join(path , name),bbox_inches='tight')
+    plt.clf()
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
     if suma[0]>=1:
         res={
-        'num': int(suma[1]),
-        'text':"Presence of weed found",
-        'total' : int(suma[2])
+            'id': int(weedPicId),
+            'num': int(suma[1]),
+            'text':"Presence of weed found",
+            'total' : int(suma[2])
         }
     else:
         res={
-        'num': int(suma[1]),
-        'text':"Weed not found",
-        'total': int(suma[2])
+            'id': int(weedPicId),
+            'num': int(suma[1]),
+            'text':"Weed not found",
+            'total': int(suma[2])
         }
 
     print(res)
@@ -323,77 +366,80 @@ def weed(img_path):
 
 #pests functions
 def conversion(img_path):
-    #os.system()
     image = cv2.imread(img_path)
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    cv2.imwrite('gray_image.png',gray_image)
-    #cv2_imshow(image)
-    #cv2_imshow(gray_image)
-    cv2.waitKey(0)                 # Waits forever for user to press any key
+    cv2.waitKey(0)                 
     cv2.destroyAllWindows()
+    return gray_image
 
-def gaussian():
-    image = cv2.imread('gray_image.png')
+def gaussian(gray_image):
     cv2.getGaussianKernel(9,9)
-    blur= cv2.GaussianBlur(image,(5,5),0)
-    cv2.imwrite('blur.png',blur)
-    #cv2_imshow(blur)
+    blur= cv2.GaussianBlur(gray_image,(5,5),0)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+    return blur
 
-def averagefilter():
-    image=cv2.imread('blur.png')
+def averagefilter(blur):
     kernel=np.ones((5,5),np.float32)/25
-    dst= cv2.filter2D(image,-1,kernel)
-    #plt.subplot(121),plt.imshow(image),plt.title('blur')
-    #plt.xticks([]), plt.yticks([])
-    #plt.subplot(122),plt.imshow(dst),plt.title('averaged')
-    #plt.xticks([]), plt.yticks([])
-    #plt.show()
-    cv2.imwrite('averaged.png',dst)
+    dst= cv2.filter2D(blur,-1,kernel)
+    path = 'static/results'
+    cv2.imwrite(os.path.join(path , 'averaged.jpg'), dst)
 
 def segmentation():
-    image = cv2.imread('averaged.png')
+    global pestPicId
+    path = 'static/results'
+    image = cv2.imread(os.path.join(path , 'averaged.jpg'))
+    width,height=Image.open(os.path.join(path , 'averaged.jpg')).size
+    total=width*height
     gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
     ret, thresh = cv2.threshold(gray,0,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
-    cv2.imwrite('thresh_image.jpg',thresh)
-    #cv2_imshow(thresh)
+    os.remove(os.path.join(path , 'averaged.jpg'))
+
+    plt.subplot(121),plt.imshow(image),plt.title('Grayscale\nImage')
+    plt.xticks([]), plt.yticks([])
+    plt.subplot(122),plt.imshow(thresh),plt.title('Processed\nImage')
+    plt.xticks([]), plt.yticks([])
+    name = 'p_subplot_{}.jpg'.format(pestPicId)
+    plt.savefig(os.path.join(path , name),bbox_inches='tight')
+    plt.clf()
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-     # noise removal
     kernel = np.ones((3,3),np.uint8)
     opening = cv2.morphologyEx(thresh,cv2.MORPH_OPEN,kernel, iterations = 3)
-    #cv2_imshow(thresh)
-    cv2.waitKey(0)                 # Waits forever for user to press any key
+    cv2.waitKey(0)                   
     cv2.destroyAllWindows()
-
-
-    # sure background area
     sure_bg = cv2.dilate(opening,kernel,iterations=3)
-    #cv2_imshow(sure_bg)
-    cv2.waitKey(0)                 # Waits forever for user to press any key
+    num=np.sum(sure_bg == 255)
+    cv2.waitKey(0)                 
     cv2.destroyAllWindows()
-    print ("No. of pests in the image: ")
+    y_units=[num,total]
+    x_units=[1,2]
+    labels=['White pixels','Total pixels']
+    plt.bar(x_units,y_units,tick_label=labels,width=0.4,align='center',color=['blue','green'])
+    plt.xlabel('x - axis')
+    plt.ylabel('Number of pixels')
+    name = 'p_graph_{}.jpg'.format(pestPicId)
+    plt.savefig(os.path.join(path , name),bbox_inches='tight')
+    plt.clf()
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
     labelarray, particle_count = ndimage.measurements.label(sure_bg)
-    print (particle_count)
-    return particle_count
-
+    return [particle_count,num,total]
 
 def detect_pest(img_path):
-    conversion(img_path)
-    array = detect_weed(img_path)
-    gaussian()
-    averagefilter()
-    count = segmentation()
-
+    gray_image = conversion(img_path)
+    blur = gaussian(gray_image)
+    averagefilter(blur)
+    array=segmentation()
+    global picId
     res = {
+        'id': int(pestPicId),
         'text': "No. of Pest Detected ",
-        'count': int(count),
+        'count': int(array[0]),
         'num': int(array[1]),
         'total': int(array[2])
     }
-
     return res
 
 #mail function
