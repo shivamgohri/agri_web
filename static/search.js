@@ -15,7 +15,9 @@ var availableTags = [
     "Logs",
     "Model",
     "Guides",
-    "Log In"];
+    "Log In",
+    "Pest",
+    "Weed"];
 
 $(document).ready(function(){
   $("#searchInput").autocomplete({
@@ -58,6 +60,12 @@ $(document).ready(function(){
         else if(value == "weather data" || value == "weather" || value == "temperature" || value == "live weather"){
             searchQuery = "Weather";
         }
+        else if(value == "pest" || value == "pests"){
+            searchQuery = "Pest";
+        }
+        else if(value == "weed" || value == "weeds"){
+            searchQuery = "Weed";
+        }
     });
 });
 
@@ -80,5 +88,11 @@ function updateSearch(){
     }
     else if(searchQuery == "Weather"){
         window.location.href = "/weather";
+    }
+    else if(searchQuery == "Pest"){
+        window.location.href = "/pest";
+    }
+    else if(searchQuery == "Weed"){
+        window.location.href = "/weed";
     }
 }

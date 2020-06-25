@@ -2,7 +2,6 @@ $(document).ready(function () {
     // Init
     $("#weedSpinner").hide();
     $('.image-section').hide();
-    $('.loader').hide();
     $('#result').hide();
     $('#TestImage').hide();
 
@@ -43,10 +42,9 @@ $(document).ready(function () {
         var total_pixels = data.total; 
         var result = data.text; 
         var picId = data.id;
-        $('.loader').hide();
         $('#result').fadeIn(600);
         $('#result').html( "Result: " + result + "<br><br>" + "Weed Pixels Predicted = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per unit) = " + (pixels/total_pixels) );
-        $("#imagePlots").html( "<img height='256px' src='static/results/w_graph_" + picId + ".jpg'>" );
+        $("#imagePlots").html( "<img height='256px' src='static/results/w_graph_" + picId + ".jpg'><br><img height='256px' src='static/results/w_subplot_" + picId + ".jpg'>" );
         enableAll();
     }
 
@@ -74,7 +72,6 @@ $(document).ready(function () {
         // Show loading animation
         hideResult();
         $(this).hide();
-        $('.loader').show();
 
         // Make prediction by calling api /predict
         $.ajax({

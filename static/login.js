@@ -1,5 +1,6 @@
 var userEmail;
 var userPassword;
+var state = false;
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
@@ -7,6 +8,11 @@ firebase.auth().onAuthStateChanged(function(user) {
     userEmail = user.email;
     $("#loggedin").toast('show');
     document.getElementById('logDIV').innerHTML = "Hi, " + userEmail + "!";
+    console.log(state);
+    if(state==true){
+      sendWelcomeRequest(userEmail);
+      state = false;
+    }
 
   } else {
     // No user is signed in.
@@ -25,7 +31,10 @@ $("#loginButton").on("click", function(evt) {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(function(firebaseUser) {
        // Success 
-       window.location.href = "/live";
+        state = true;
+        window.setTimeout(function(){
+          window.location.href = "live";
+        }, 2500);
     })
     .catch(function(error) {
     // Handle Errors here.
@@ -36,6 +45,21 @@ $("#loginButton").on("click", function(evt) {
     // ...
   });
 });
+
+function sendWelcomeRequest(email){
+  var request = $.ajax({
+      type: 'POST',
+      url: 'welcome?id=' + email,
+      contentType: false,
+      cache: false,
+      processData: false,
+      async: true,
+      success: function (data) {
+          var success = data.success;
+          console.log(success);
+      },
+  }); 
+}
 
 $("#logoutButton").on("click", function(evt) {
   $("#email_field").val('');

@@ -47,7 +47,7 @@ $(document).ready(function () {
         $('.loader').hide();
         $('#result').fadeIn(600);
         $('#result').html( "Result: " + text + " = " + count + "<br><br>" + "Pest Infected Pixels = " + pixels + "<br>" + "Total Image Pixels = " + total_pixels + "<br>" + "Area Covered (per Unit) = " + (pixels/total_pixels) );
-        $("#imagePlots").html( "<img height='256px' src='static/results/p_subplot_" + picId + ".jpg'>&emsp;<img height='256px' src='static/results/p_graph_" + picId + ".jpg'>" );
+        $("#imagePlots").html( "<img height='256px' src='static/results/p_graph_" + picId + ".jpg'><br><img height='256px' src='static/results/p_subplot_" + picId + ".jpg'>" );
         enableAll();
     }
 

@@ -66,25 +66,21 @@ $.when(dateTimeRequest, otherRequest).then(function(){
         datasets: [
             {
                 label: label,
-                fillColor: "rgba(220,0,0,0.5)",
-                strokeColor: "rgba(220,220,0,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
-                data: otherData
+                data: otherData,
+                backgroundColor: 'rgba(175,52,118,0.32)',
+                borderColor: 'rgba(175,52,118,0.48)',
+                pointBackgroundColor: 'rgba(175,52,118,0.58)',
+                fill: true
             }]
-    };
-
-    options = {
-        scaleShowGridLines : true,
     };
 
     ctx = document.getElementById("myChart").getContext("2d");
 
-    $("#chartSpinner").hide();
+    $("#chartSpinner").hide();  
 
     myChart = new Chart(ctx, {
         type: type,
-        data: data,
+        data: data
     });
     updateTable();
 });
@@ -199,16 +195,12 @@ function getAirQualityData(){
             datasets: [
                 {
                     label: label,
-                    fillColor: "rgba(220,0,0,0.5)",
-                    strokeColor: "rgba(220,220,0,0.8)",
-                    highlightFill: "rgba(220,220,220,0.75)",
-                    highlightStroke: "rgba(220,220,220,1)",
-                    data: otherData
+                    data: otherData,
+                    backgroundColor: 'rgba(175,52,118,0.32)',
+                    borderColor: 'rgba(175,52,118,0.48)',
+                    pointBackgroundColor: 'rgba(175,52,118,0.58)',
+                    fill: true
                 }]
-        };
-
-        options = {
-            scaleShowGridLines : true,
         };
 
         ctx = document.getElementById("myChart").getContext("2d");
@@ -279,11 +271,11 @@ function getSoilPhData(){
             datasets: [
                 {
                     label: label,
-                    fillColor: "rgba(220,0,0,0.5)",
-                    strokeColor: "rgba(220,220,0,0.8)",
-                    highlightFill: "rgba(220,220,220,0.75)",
-                    highlightStroke: "rgba(220,220,220,1)",
-                    data: otherData
+                    data: otherData,
+                    backgroundColor: 'rgba(54,162,235,0.2)',
+                    borderColor: 'rgba(54,162,235,0.3)',
+                    pointBackgroundColor: 'rgba(54,162,235,0.4)',
+                    fill: true
                 }]
         };
 
@@ -359,11 +351,11 @@ function getSoilMoistureData(){
             datasets: [
                 {
                     label: label,
-                    fillColor: "rgba(220,0,0,0.5)",
-                    strokeColor: "rgba(220,220,0,0.8)",
-                    highlightFill: "rgba(220,220,220,0.75)",
-                    highlightStroke: "rgba(220,220,220,1)",
-                    data: otherData
+                    data: otherData,
+                    backgroundColor: 'rgba(255,200,186,0.62)',
+                    borderColor: 'rgba(255,200,186,0.88)',
+                    pointBackgroundColor: 'rgba(255,200,186,0.92)',
+                    fill: true
                 }]
         };
 
@@ -439,11 +431,11 @@ function getTemperatureData(){
             datasets: [
                 {
                     label: label,
-                    fillColor: "rgba(220,0,0,0.5)",
-                    strokeColor: "rgba(220,220,0,0.8)",
-                    highlightFill: "rgba(220,220,220,0.75)",
-                    highlightStroke: "rgba(220,220,220,1)",
-                    data: otherData
+                    data: otherData,
+                    backgroundColor: 'rgba(255,200,112,0.53)',
+                    borderColor: 'rgba(255,200,112,0.69)',
+                    pointBackgroundColor: 'rgba(255,200,112,0.79)',
+                    fill: true
                 }]
         };
 
@@ -519,11 +511,11 @@ function getHumidityData(){
             datasets: [
                 {
                     label: label,
-                    fillColor: "rgba(220,0,0,0.5)",
-                    strokeColor: "rgba(220,220,0,0.8)",
-                    highlightFill: "rgba(220,220,220,0.75)",
-                    highlightStroke: "rgba(220,220,220,1)",
-                    data: otherData
+                    data: otherData,
+                    backgroundColor: 'rgba(76,76,158,0.22)',
+                    borderColor: 'rgba(76,76,158,0.42)',
+                    pointBackgroundColor: 'rgba(76,76,158,0.52)',
+                    fill: true
                 }]
         };
 
@@ -537,7 +529,7 @@ function getHumidityData(){
 
         myChart = new Chart(ctx, {
             type: type,
-            data: data,
+            data: data
         });
         updateTable();
     });
@@ -671,34 +663,22 @@ function getPredictionModelsData(){
             datasets: [
                 {
                     label: "Disease Detection Prediction",
-                    fillColor: "rgba(220,0,0,0.5)",
-                    strokeColor: "rgba(220,220,0,0.8)",
-                    highlightFill: "rgba(220,220,220,0.75)",
-                    highlightStroke: "rgba(220,220,220,1)",
+                    fill: false,
                     data: diseaseDetectionData
                 },
                 {
                     label: "Soil Texture Prediction",
-                    fillColor: "rgba(220,0,0,0.5)",
-                    strokeColor: "rgba(220,220,0,0.8)",
-                    highlightFill: "rgba(220,220,220,0.75)",
-                    highlightStroke: "rgba(220,220,220,1)",
+                    fill: false,
                     data: soilTextureData
                 },
                 {
                     label: "Weed & Pest Detection Prediction",
-                    fillColor: "rgba(220,0,0,0.5)",
-                    strokeColor: "rgba(220,220,0,0.8)",
-                    highlightFill: "rgba(220,220,220,0.75)",
-                    highlightStroke: "rgba(220,220,220,1)",
+                    fill: false,
                     data: weedPestData
                 },
                 {
                     label: "Yield Prediction",
-                    fillColor: "rgba(220,0,0,0.5)",
-                    strokeColor: "rgba(220,220,0,0.8)",
-                    highlightFill: "rgba(220,220,220,0.75)",
-                    highlightStroke: "rgba(220,220,220,1)",
+                    fill: false,
                     data: yieldPredictionData
                 },
             ]
@@ -715,6 +695,13 @@ function getPredictionModelsData(){
         myChart = new Chart(ctx, {
             type: type,
             data: data,
+            options: {
+                plugins: {
+                  colorschemes: {
+                    scheme: 'brewer.SetOne9'
+                  }
+                }
+            }
         });
 
         updatePredictionTable();

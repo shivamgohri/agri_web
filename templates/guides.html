@@ -160,11 +160,27 @@
 
                 });
             }
+
+            function showWebsiteGuide() {
+                $("#GUIDESspinner").show();
+                var storageRef = firebase.storage().ref();
+                var spaceRef = storageRef.child('Website Guide.pdf');
+                storageRef.child('Website Guide.pdf').getDownloadURL().then(function(url) {
+                    var test = url;
+                    document.querySelector('iframe').src = test;
+                    $("#GUIDESspinner").hide();
+                    $("#guidesFrame").show();
+
+                }).catch(function(error) {
+
+                });
+            }
         </script>
 
         <div class="row justify-content-center" style="margin-top: 10px;" >
             <input type="button" class="btn btn-outline-dark" value ="Application Guide" onclick="showAppGuide();"> &emsp;
-            <input type="button" class="btn btn-outline-dark" value ="Code Guide" onclick="showCodeGuide();">
+            <input type="button" class="btn btn-outline-dark" value ="Code Guide" onclick="showCodeGuide();"> &emsp;
+            <input type="button" class="btn btn-outline-dark" value ="Website Guide" onclick="showWebsiteGuide();">
         </div>
 
         <!--GUIDESspinner-->

@@ -30,15 +30,14 @@ $( document ).ready(function() {
 function getWeather(userLatitude, userLongitude, api_key){
 
   // UN-COMMENT AT THE TIME OF DEVELOPMENT
-  // var url = "https://api.openweathermap.org/data/2.5/weather?lat=" + userLatitude + "&lon=" + userLongitude + "&appid=" + api_key;
-  // console.log(url);
+  var url = "https://api.openweathermap.org/data/2.5/weather?lat=" + userLatitude + "&lon=" + userLongitude + "&appid=" + api_key;
   
-  // var weatherRequest = $.getJSON(url, function(json){
-  //   data = json;
-  //   console.log(data);
-  // });
+  var weatherRequest = $.getJSON(url, function(json){
+    data = json;
+    console.log(data);
+  });
 
-  // $.when(weatherRequest).then(function(){
+  $.when(weatherRequest).then(function(){
 
     var weather_icon_code = data.weather[0].icon;        //
     var iconurl = "http://openweathermap.org/img/w/" + weather_icon_code + ".png";
@@ -90,27 +89,27 @@ function getWeather(userLatitude, userLongitude, api_key){
     var current_time = getTime(current_unix);       //
     var current_day = getDay(current_unix);         //
 
-    // $("#weather_report").html( "City Name: " + city_name +"<br>" +
-    //                            "City id: " + city_id +"<br>" +
-    //                            "Offset: " + offset +"<br>" +
-    //                            "Country Name: " + country_name +"<br>" +
-    //                            "Cloud Percentage: " + cloud_percentage +"<br>" +
-    //                            "Minimum Temperature: " + min_temp +"<br>" +
-    //                            "Maximum Temperature: " + max_temp +"<br>" +
-    //                            "Current Temperature: " + current_temp +"<br>" +
-    //                            "Pressure: " + pressure +"<br>" +
-    //                            "Humidity: " + humidity +"<br>" +
-    //                            "Atmospheric Pressure at Sea Level: " + ap_seaLevel +"<br>" +
-    //                            "Atmospheric Pressure at Ground Level: " + ap_grndLevel +"<br>" +
-    //                            "Wind: " + wind +"<br>" +
-    //                            "Weather Title: " + weather_title +"<br>" +
-    //                            "Weather Description: " + weather_desciption +"<br>" +
-    //                            "Sunrise Time: " + sunrise_time +"<br>" +
-    //                            "Sunset Time: " + sunset_time +"<br>" +
-    //                            "Current Date: " + current_date +"<br>" +
-    //                            "Current Time: " + current_time +"<br>" +
-    //                            "Current Day: " + current_day +"<br>" +
-    //                            "END" );
+    $("#weather_report").html( "City Name: " + city_name +"<br>" +
+                               "City id: " + city_id +"<br>" +
+                               "Offset: " + offset +"<br>" +
+                               "Country Name: " + country_name +"<br>" +
+                               "Cloud Percentage: " + cloud_percentage +"<br>" +
+                               "Minimum Temperature: " + min_temp +"<br>" +
+                               "Maximum Temperature: " + max_temp +"<br>" +
+                               "Current Temperature: " + current_temp +"<br>" +
+                               "Pressure: " + pressure +"<br>" +
+                               "Humidity: " + humidity +"<br>" +
+                               "Atmospheric Pressure at Sea Level: " + ap_seaLevel +"<br>" +
+                               "Atmospheric Pressure at Ground Level: " + ap_grndLevel +"<br>" +
+                               "Wind: " + wind +"<br>" +
+                               "Weather Title: " + weather_title +"<br>" +
+                               "Weather Description: " + weather_desciption +"<br>" +
+                               "Sunrise Time: " + sunrise_time +"<br>" +
+                               "Sunset Time: " + sunset_time +"<br>" +
+                               "Current Date: " + current_date +"<br>" +
+                               "Current Time: " + current_time +"<br>" +
+                               "Current Day: " + current_day +"<br>" +
+                               "END" );
 
     $("#weatherSpinner").hide();
 
@@ -125,7 +124,7 @@ function getWeather(userLatitude, userLongitude, api_key){
     $("#dayDetails").html( "Date: " + current_date + "&emsp; Time: " + current_time + "&emsp; Day: " + current_day );
     $("#sunDetails").html( "Sunrise Time: " + sunrise_time + "&emsp; Sunset Time: " + sunset_time );
 
-  // });
+  });
 
 }
 

@@ -18,6 +18,7 @@ from scipy import ndimage
 from flask import *
 import pyrebase
 from flask_mail import Mail, Message
+from time import ctime
 
 
 #firebase configuration
@@ -54,8 +55,8 @@ mail = Mail(app)
 port = int(os.getenv('PORT', 8000))
 
 #picId declare
-pestPicId = 0
-weedPicId = 0
+pestPicId = 400
+weedPicId = 400
 
 
 
@@ -108,7 +109,7 @@ def guides():
 	return render_template("guides.html")
 
 
-#mail route
+#mail routes
 @app.route('/sendmail', methods=['GET', 'POST'])
 def send_mail():
     if request.method == 'POST':
@@ -117,7 +118,7 @@ def send_mail():
         msg = Message("Logs Data : Smart AGRI !",
               sender = "smartagriculturedeloitte@gmail.com",
               recipients = [mailId, "smartagriculturedeloitte@gmail.com"])
-        msg.body = "Hey {}, \n \nAttached pdf consists of all the Logs Data as requested by you. \nWe are really happy to connect with you. Have a great day. \n \nIf you are encountering any issue, please write to us at smartagriculturedeloitte@gmai.com \n \nRegards, \nSmart AGRI".format(mailId)  
+        msg.body = "Hey {}, \n \nAttached pdf consists of all the Logs Data as requested by you. \nWe are really happy to connect with you. Have a great day. \n \nIf you are encountering any issue, please write to us at smartagriculturedeloitte@gmail.com \n \nRegards, \nSmart AGRI".format(mailId)  
         curr = os.getcwd()
         response = download_pdf()
 
@@ -129,6 +130,24 @@ def send_mail():
 
         with open(curr+"/files/logs.pdf",'rb') as p:
             msg.attach(filename="logs.pdf",disposition="attachment",content_type="application/pdf",data=p.read())       
+        mail.send(msg)
+
+        ans = {
+            'success': 1
+        }
+        return ans
+    return None
+
+@app.route('/welcome', methods=['GET', 'POST'])
+def welcome_user():
+    if request.method == 'POST':
+        mailId = request.args.get('id')
+        timeId = time.ctime()
+        #message body
+        msg = Message("Welcome : Smart AGRI !",
+              sender = "smartagriculturedeloitte@gmail.com",
+              recipients = [mailId, "smartagriculturedeloitte@gmail.com"])
+        msg.body = "Hey {}, \n \nYour account has been logged in at *{}* ! \n \nIf you are encountering any issue, please write to us at smartagriculturedeloitte@gmail.com \n \nRegards, \nSmart AGRI".format(mailId, timeId)      
         mail.send(msg)
 
         ans = {
@@ -157,8 +176,10 @@ def weedupload():
         if weedPicId!=1:
             tempId = weedPicId - 1
             path = 'static/results'
-            tempname = 'w_graph_{}.jpg'.format(tempId)
-            os.remove(os.path.join(path , tempname))
+            tempname1 = 'w_graph_{}.jpg'.format(tempId)
+            tempname2 = 'w_subplot_{}.jpg'.format(tempId)
+            os.remove(os.path.join(path , tempname2))
+            os.remove(os.path.join(path , tempname1))
 
         f = request.files['file']
         basepath = os.path.dirname(__file__)
@@ -233,8 +254,10 @@ def getweedresult():
         if weedPicId!=1:
             tempId = weedPicId - 1
             path = 'static/results'
-            tempname = 'w_graph_{}.jpg'.format(tempId)
-            os.remove(os.path.join(path , tempname))
+            tempname1 = 'w_graph_{}.jpg'.format(tempId)
+            tempname2 = 'w_subplot_{}.jpg'.format(tempId)
+            os.remove(os.path.join(path , tempname2))
+            os.remove(os.path.join(path , tempname1))
 
         number = request.args.get('id')
         path = r'static/weed_testcases/{}.jpg'.format(number)
@@ -306,6 +329,7 @@ def getData():
 
 #weed functions
 def detect_weed(img_path):
+    global weedPicId
     img = cv2.imread(img_path)
     width, height = Image.open(img_path).size
     total_pixels = width*height
@@ -316,6 +340,17 @@ def detect_weed(img_path):
     img_erosion = cv2.erode(mask, arr, iterations=1)
     img_dilation = cv2.dilate(img_erosion, arr, iterations=1)
     n_white_pix = numpy.sum(img_dilation == 255)
+
+    plt.subplot(121),plt.imshow(hsv),plt.title('HSV\nImage')
+    plt.xticks([]), plt.yticks([])
+    plt.subplot(122),plt.imshow(img_dilation),plt.title('Processed\nImage')
+    plt.xticks([]), plt.yticks([])
+    name = 'w_subplot_{}.jpg'.format(weedPicId)
+    path = 'static/results'
+    plt.savefig(os.path.join(path , name),bbox_inches='tight')
+    plt.clf()
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
     if n_white_pix >= 15000:
         asd=1
